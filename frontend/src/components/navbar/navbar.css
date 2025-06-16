@@ -1,0 +1,53 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4e9367;
+  color: #fff;
+  padding: 1rem;
+}
+
+/* NAVBAR LEFT */
+
+.navbar-left .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* NAVBAR CENTER */
+
+.navbar-center {
+  display: flex;
+  align-items: center;
+}
+
+/* NAVBAR RIGHT */
+
+.navbar-right .nav-buttons {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+/* OLD STYLING - TO DELETE */
+
+/* .navbar-right .nav-buttons li {
+  margin-right: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-family: 'Cantarell', 'Ubuntu', Helvetica, sans-serif;
+  background-color: #f36e51;
+}
+
+.navbar-right .nav-buttons li:hover {
+  background-color: #f05330;
+
+}
+
+.navbar-right .nav-buttons a {
+  color: #fff;
+  text-decoration: none;
+} */
