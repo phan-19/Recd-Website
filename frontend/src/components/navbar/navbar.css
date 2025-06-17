@@ -4,7 +4,6 @@
   align-items: center;
   background-color: #4e9367;
   color: #fff;
-  padding: 1rem;
 }
 
 /* NAVBAR LEFT */
@@ -12,6 +11,7 @@
 .navbar-left .logo {
   font-size: 1.5rem;
   font-weight: bold;
+  padding: 0.5rem;
   color: #fff;
   text-decoration: none;
 }
@@ -31,23 +31,3 @@
   margin: 0;
   padding: 0;
 }
-
-/* OLD STYLING - TO DELETE */
-
-/* .navbar-right .nav-buttons li {
-  margin-right: 1rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  font-family: 'Cantarell', 'Ubuntu', Helvetica, sans-serif;
-  background-color: #f36e51;
-}
-
-.navbar-right .nav-buttons li:hover {
-  background-color: #f05330;
-
-}
-
-.navbar-right .nav-buttons a {
-  color: #fff;
-  text-decoration: none;
-} */

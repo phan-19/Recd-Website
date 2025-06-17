@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Navbar setCurrentPage={setCurrentPage}></Navbar>
+        <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage}></Navbar>
       </header>
       <div>
       {renderPage()}
