@@ -13,7 +13,7 @@ export default function Navbar({ setCurrentPage, currentPage }: NavbarProps) {
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                <a href="/" className="logo">Logo</a>
+                <a href="/" className="logo">Recd</a>
             </div>
             <div className="navbar-center">
                 

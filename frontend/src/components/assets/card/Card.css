@@ -1,0 +1,38 @@
+.card {
+    border: 1px solid #fff;
+    max-width: 300px;
+    border-radius: 5%;
+    overflow: hidden;
+    background-color: rgb(66, 76, 71);
+    box-shadow: 0 2px 5px black;
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 1rem;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.card-type {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: grey;
+}
+
+.card-rating {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: #d0d0d0
+}

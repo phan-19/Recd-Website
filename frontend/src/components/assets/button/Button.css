@@ -1,3 +1,4 @@
+/* Styling buttons in Navbar */
 .nav-button {
     background-color: #366b4b;
     color: white;
@@ -16,4 +17,5 @@
   .nav-button.active {
     background-color: #28543f;
   }
+  
   
