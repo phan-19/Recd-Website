@@ -8,3 +8,5 @@
 * Julia Bush - Project Manager
 * Joshua Austin Land - Scrum Master
 * Porter Hanley - Development Team Member
+
+## CHECK CLOSED PULL REQUESTS PLEASE
