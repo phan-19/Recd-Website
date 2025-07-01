@@ -1,8 +1,10 @@
 .card {
-    border: 1px solid #fff;
+    border: 1px solid #000;
+    min-width: 200px;
     max-width: 300px;
-    border-radius: 5%;
-    overflow: hidden;
+    min-height: 250px;
+    max-height: 350px;
+    overflow: scroll;
     background-color: rgb(66, 76, 71);
     box-shadow: 0 2px 5px black;
 }
@@ -34,5 +36,40 @@
 
 .card-description {
     font-size: 1rem;
-    color: #d0d0d0
+    color: #d0d0d0;
+    max-height: 100px;
+    overflow: scroll;
+}
+
+
+
+.card:not(:last-child) {
+    margin-right: 4px;
+}
+
+@media (min-width: 500px) {
+    .card {
+        flex-basis: calc(50% - 10px);
+    }
+    .card:not(:last-child) {
+        margin-right: 4px;
+    }
+}
+
+@media (min-width: 700px) {
+    .card {
+        flex-basis: calc(calc(100% / 3) - 20px);
+    }
+    .card:not(:last-child) {
+        margin-right: 8px;
+    }
+}
+
+@media (min-width: 1100px) {
+    .card {
+        flex-basis: calc(25% - 30px);
+    }
+    .card:not(:last-child) {
+        margin-right: 12px;
+    }
 }

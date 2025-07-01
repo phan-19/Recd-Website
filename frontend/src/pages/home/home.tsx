@@ -1,6 +1,6 @@
 import './home.css';
 
-import Card from "../../components/assets/card/card";
+import Card from "../../components/assets/card/Card";
 
 export default function Home() {
     return (
@@ -9,14 +9,38 @@ export default function Home() {
                 <h2 className='section-title'>
                     Recommended for You
                 </h2>
-                <div className='card-list'>
-                    <Card 
+                <div className='card-scroll'>
+                    <Card
                         cardStyle='card'
-                        title='Test Item'
+                        title='Test Item 1'
                         type='Film'
                         rating='4.5/5'
                         description='This is a test of the card feature. How does it look?'
                         image='/the-batman.png'
+                    />
+                    <Card
+                        cardStyle="card"
+                        title='Test Item 2'
+                        type='Television Show'
+                        rating='3.0/5'
+                        description='This is a test of stacking card features. How does it look?'
+                        image=''
+                    />
+                    <Card 
+                        cardStyle='card'
+                        title='Test Item 3'
+                        type='Book'
+                        rating='5.0/5'
+                        description='This is a test of the scroll feature. How does it look?'
+                        image=''
+                    />
+                    <Card 
+                        cardStyle='card'
+                        title='Test Item 4'
+                        type='Album'
+                        rating='2.0/5'
+                        description='This is a test of scrolling. Please just scroll. This is also a test of text overflow. Testing overflow. Testing overflow. Testing overflow. Testing overflow. Size page down to see how overflow looks at different amounts.'
+                        image=''
                     />
                 </div>
             </div>
