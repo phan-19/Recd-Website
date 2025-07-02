@@ -41,7 +41,7 @@
     overflow: scroll;
 }
 
-
+/* Card Resizing for different screen sizes */
 
 .card:not(:last-child) {
     margin-right: 4px;

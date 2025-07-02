@@ -1,6 +1,7 @@
 h2.section-title {
     font-size: 2rem;
     margin: 1rem 0.5rem 0.25rem;
+    font-weight: normal;
 }
 
 .card-list {
