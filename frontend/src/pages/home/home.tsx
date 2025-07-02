@@ -43,6 +43,12 @@ export default function Home() {
                         image=''
                     />
                 </div>
+                <h2 className='section-title'>
+                    Recently Added
+                </h2>
+                <div className='card-scroll'>
+                    
+                </div>
             </div>
         </main>
         
