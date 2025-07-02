@@ -32,6 +32,16 @@ h1 {
   line-height: 1.1;
 }
 
+h2.section-title {
+    font-size: 2rem;
+    margin: 1rem 0.5rem 0.25rem;
+    font-weight: normal;
+}
+
+.card-list {
+    margin: 0rem 1rem 0rem 1rem;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
