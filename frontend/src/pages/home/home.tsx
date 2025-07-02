@@ -7,7 +7,7 @@ export default function Home() {
         <main>
             <div>
                 <h2 className='section-title'>
-                    Recommended for You
+                    Recommended
                 </h2>
                 <div className='card-scroll'>
                     <Card

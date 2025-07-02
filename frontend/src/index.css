@@ -33,13 +33,15 @@ h1 {
 }
 
 h2.section-title {
-    font-size: 2rem;
-    margin: 1rem 0.5rem 0.25rem;
-    font-weight: normal;
+  font-size: 2rem;
+  font-weight: normal;
+  margin: 1rem auto;
+  width: 50%;
+  text-align: center;
 }
 
 .card-list {
-    margin: 0rem 1rem 0rem 1rem;
+  margin: 0rem 1rem 0rem 1rem;
 }
 
 @media (prefers-color-scheme: light) {
@@ -60,6 +62,7 @@ h2.section-title {
   display: flex;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
+  margin: 0.5rem;
 }
 
 .cards::-webkit-scrollbar {
