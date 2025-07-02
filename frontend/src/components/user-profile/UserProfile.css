@@ -1,0 +1,28 @@
+.profile {
+    border: 1px solid #000;
+    min-width: 300px;
+    min-height: 200px;
+    border-radius: 2.5px;
+    margin: 0.5rem;
+    padding: 1rem;
+    background-color: rgb(66, 76, 71);
+    box-shadow: 0 2px 5px black;
+}
+
+.display-name {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.username {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: grey;
+}
+
+.bio {
+    font-size: 0.8rem;
+    color: #d0d0d0;
+    max-height: 100px;
+    overflow: scroll;
+}
