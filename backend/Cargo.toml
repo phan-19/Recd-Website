@@ -1,6 +1,9 @@
 [package]
 name = "backend"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
+async-std = "1.13.1"
+futures = "0.3.31"
+sqlx = "0.8.6"
