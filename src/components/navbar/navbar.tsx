@@ -1,6 +1,7 @@
 import './Navbar.css';
 
 import Button from '../assets/button/Button';
+import SearchBar from '../assets/search-bar/SearchBar';
 
 interface NavbarProps {
     setCurrentPage: (page: string) => void;
@@ -10,10 +11,14 @@ interface NavbarProps {
 export default function Navbar({ setCurrentPage, currentPage }: NavbarProps) {
     const isActive = (page: string) => currentPage === page ? 'active' : '';
 
+    function handleSearch(userText: string): void {
+        throw new Error('Function not implemented.');
+    }
+
     return (
         <nav className="navbar">
-            <div className="navbar-left">
-                <a href="/" className="logo">Recd</a>
+            <div className="search-bar-container">
+                <SearchBar onSearch={handleSearch}/>
             </div>
             <div className="navbar-center">
                 
