@@ -208,6 +208,12 @@ async fn main() {
     let pool = SqlitePool::connect("sqlite://recd.db").await.unwrap();
     let args: Vec<String> = env::args().collect();
 
+    #Running the backend API
+    let pool_clone = pool.clone();
+    tokio::spawn(async move {
+        run_backend(pool_clone).await;
+    });
+
     for arg in args {
         match arg.as_str() {
             "-n" | "new" => new_user = true,
