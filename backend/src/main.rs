@@ -1,6 +1,6 @@
 mod api_back.rs
 
-use api_back.rs::run_backend
+use api_back.rs::run_backend;
 use sqlx::query;
 use sqlx::sqlite::SqliteRow;
 use sqlx::{Row, SqlitePool};
