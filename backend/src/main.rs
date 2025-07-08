@@ -201,7 +201,7 @@ Main
 
 */
 
-#[async_std::main]
+#[tokio::main]
 async fn main() {
     let mut new_user = false;
 
