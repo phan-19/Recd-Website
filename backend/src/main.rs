@@ -1,3 +1,6 @@
+mod api_back.rs
+
+use api_back.rs::run_backend;
 use sqlx::query;
 use sqlx::sqlite::SqliteRow;
 use sqlx::{Row, SqlitePool};
@@ -198,12 +201,18 @@ Main
 
 */
 
-#[async_std::main]
+#[tokio::main]
 async fn main() {
     let mut new_user = false;
 
     let pool = SqlitePool::connect("sqlite://recd.db").await.unwrap();
     let args: Vec<String> = env::args().collect();
+
+    #Running the backend API
+    let pool_clone = pool.clone();
+    tokio::spawn(async move {
+        run_backend(pool_clone).await;
+    });
 
     for arg in args {
         match arg.as_str() {
