@@ -42,7 +42,7 @@ async fn main() {
         .await
         .unwrap();
     println!(
-        "Backend API running at http://{}",
+        "Recd backend running at http://{}",
         listener.local_addr().unwrap()
     );
     axum::serve(listener, app).await.unwrap();
