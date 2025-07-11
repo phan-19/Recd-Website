@@ -46,10 +46,17 @@ pub async fn add_review(
     State(state): State<SqlitePool>,
     Json(review): Json<AddReviewRequest>,
 ) -> impl IntoResponse {
-    let qry = "insert into reviews (username, review) VALUES (?, ?)";
+    let media_id_qry = "SELECT media_id FROM media WHERE name = $1";
+    let media_id = sqlx::query_scalar::<_, i64>(&media_id_qry)
+        .bind(review.media_name)
+        .fetch_one(&state)
+        .await
+        .unwrap();
+
+    let qry = "insert into reviews (user_id, media_id, rating, review_txt) VALUES ($1, $2, $3, $4)";
     match sqlx::query(qry)
         .bind(review.user_id)
-        .bind(review.media_name)
+        .bind(media_id)
         .bind(review.rating)
         .bind(review.review_txt)
         .execute(&state)
@@ -77,7 +84,7 @@ pub async fn add_media(
     State(state): State<SqlitePool>,
     Json(media): Json<AddMediaRequest>,
 ) -> impl IntoResponse {
-    let qry = "insert into media (media_name, description, medium) VALUES (?, ?, ?)";
+    let qry = "insert into media (name, description, medium) VALUES (?, ?, ?)";
     match sqlx::query(qry)
         .bind(media.media_name)
         .bind(media.description)

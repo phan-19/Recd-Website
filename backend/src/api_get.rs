@@ -67,7 +67,7 @@ Page
 
 //Home
 pub async fn get_page_home(State(pool): State<SqlitePool>) -> impl IntoResponse {
-    let qry = "SELECT review_id FROM reviews ORDER BY coloumn DESC LIMIT 10";
+    let qry = "SELECT review_id FROM reviews ORDER BY review_id DESC LIMIT 10";
     let result = sqlx::query_scalar::<_, i64>(&qry).fetch_all(&pool).await;
     match result {
         Ok(reviews) => {
@@ -178,7 +178,7 @@ pub async fn search_user(
     State(pool): State<SqlitePool>,
     Path(searchterm): Path<String>,
 ) -> impl IntoResponse {
-    let qry = "SELECT (user_id, username) FROM users WHERE username LIKE $1";
+    let qry = "SELECT user_id, username FROM users WHERE username LIKE $1";
     let result = sqlx::query_as::<_, UserSearchReturn>(&qry)
         .bind("%".to_owned() + &searchterm + "%")
         .fetch_all(&pool)
@@ -214,7 +214,7 @@ pub async fn search_media(
     State(pool): State<SqlitePool>,
     Path(searchterm): Path<String>,
 ) -> impl IntoResponse {
-    let qry = "SELECT (media_id, name) FROM media WHERE name LIKE $1";
+    let qry = "SELECT media_id, name FROM media WHERE name LIKE $1";
     let result = sqlx::query_as::<_, MediaSearchReturn>(&qry)
         .bind("%".to_owned() + &searchterm + "%")
         .fetch_all(&pool)
@@ -254,17 +254,17 @@ Login
 #[derive(Deserialize)]
 pub struct LoginRequest {
     pub username: String,
-    pub passowrd: String,
+    pub password: String,
 }
 
 pub async fn login(
     State(pool): State<SqlitePool>,
     Json(login): Json<LoginRequest>,
 ) -> impl IntoResponse {
-    let qry = "SELECT (user_id, username) FROM users WHERE username = $1 AND password = $2";
+    let qry = "SELECT user_id, username FROM users WHERE username = $1 AND password = $2";
     let result = query(&qry)
         .bind(login.username)
-        .bind(login.passowrd)
+        .bind(login.password)
         .fetch_optional(&pool)
         .await;
     match result {
@@ -279,7 +279,7 @@ pub async fn login(
         }
         Ok(None) => (
             StatusCode::OK,
-            Json(json!({"success": true, "user_id" : -1, "username": ""})),
+            Json(json!({"success": false, "user_id" : -1, "username": ""})),
         )
             .into_response(),
         Err(_) => (
