@@ -37,8 +37,8 @@ pub async fn add_user(
 }
 #[derive(Deserialize)]
 pub struct AddReviewRequest {
-    pub user_id: i32,
-    pub rating: i32,
+    pub user_id: i64,
+    pub rating: i64,
     pub media_name: String,
     pub review_txt: String,
 }
