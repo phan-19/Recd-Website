@@ -10,6 +10,7 @@ import Books from './pages/books/books'
 import Misc from './pages/misc/misc'
 import Profile from './pages/profile/profile'
 import Login from './pages/login/login'
+import Signup from './pages/signup/signup'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');

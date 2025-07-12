@@ -1,25 +1,32 @@
 import React, { useState } from 'react';
-import './UserLogin.css';
+import './UserSignup.css';
 
-type UserLoginProps = {
-    onLogin: (username: string, password: string) => void;
-}
+type UserSignupProps = {
+    onSignup: (username: string, password: string, bio: string) => void;
+};
 
-const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
+const UserSignup: React.FC<UserSignupProps> = ({onSignup}) => {
     const [username, setUsername] = useState(''); //p
     const [password, setPassword] = useState(''); //vrysecurepassword:D
-    const [message, setMessage] = useState('');
+    const [bio, setBio] = useState('');
     const [userId, setUserId] = useState<number | null>(null);
+    const [message, setMessage] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const url = `http://66.231.155.18:3000/login/${username}/${password}`;
+        var url = `http://66.231.155.18:3000/user`;
 
         try {
-            const response = await fetch(url, {
-                method: 'GET'
-            });
+            var options = {
+                method: 'POST',
+     	        headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password, bio })
+            };
+
+            var response = await fetch(url, options);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -27,21 +34,22 @@ const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
 
             const result = await response.json();
 
-            if (result.success) {
+            if (result.status === 'success') {
                 setUserId(result.user_id);
-                setMessage(`Login successful`);
+                setMessage(`Signup successful`);
+                onSignup(username, password, bio);
             } else {
                 setMessage("Invalid username or password.");
             }
         } catch (error) {
-            console.error("Login error:", error);
+            console.error("Signup error:", error);
             setMessage("Could not connect to server. Please try again.");
         }
     };
 
     return (
-        <form className="user-login" onSubmit={handleSubmit}>
-            <h2 className="login-title">Log In</h2>
+        <form className="user-signup" onSubmit={handleSubmit}>
+            <h2 className="signup-title">Sign Up</h2>
             <input
                 type="text"
                 placeholder="username"
@@ -50,16 +58,23 @@ const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
                 required
             />
             <input
-                type="password"
+                type="text"
                 placeholder="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
             />
-            <button type="submit">Log In</button>
+            <input
+                type="text"
+                placeholder="bio"
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                required
+             />
+            <button type="submit">Sign Up</button>
             {message && <p>{message}</p>}
         </form>
     );
 };
 
-export default UserLogin;
+export default UserSignup;
