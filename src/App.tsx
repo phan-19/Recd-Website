@@ -9,6 +9,7 @@ import Shows from './pages/shows/shows'
 import Books from './pages/books/books'
 import Misc from './pages/misc/misc'
 import Profile from './pages/profile/profile'
+import Login from './pages/login/login'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -25,7 +26,7 @@ function App() {
     } else if (currentPage === 'misc') {
       return <Misc />;
     } else if (currentPage === 'profile') {
-      return <Profile />;
+      return <Login />;
     }
     return null;
   }
