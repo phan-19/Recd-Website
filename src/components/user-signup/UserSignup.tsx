@@ -9,7 +9,7 @@ const UserSignup: React.FC<UserSignupProps> = ({onSignup}) => {
     const [username, setUsername] = useState(''); //p
     const [password, setPassword] = useState(''); //vrysecurepassword:D
     const [bio, setBio] = useState('');
-    const [userId, setUserId] = useState<number | null>(null);
+    const [userID, setUserID] = useState<number | null>(null);
     const [message, setMessage] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -35,7 +35,7 @@ const UserSignup: React.FC<UserSignupProps> = ({onSignup}) => {
             const result = await response.json();
 
             if (result.status === 'success') {
-                setUserId(result.user_id);
+                setUserID(result.user_id);
                 setMessage(`Signup successful`);
                 onSignup(username, password, bio);
             } else {

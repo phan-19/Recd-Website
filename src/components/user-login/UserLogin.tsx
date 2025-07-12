@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import './UserLogin.css';
 
 type UserLoginProps = {
-    onLogin: (username: string, password: string) => void;
+    onLogin: (user: {user_id: number, username: string, bio: string}) => void;
 }
 
 const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
     const [username, setUsername] = useState(''); //p
     const [password, setPassword] = useState(''); //vrysecurepassword:D
     const [message, setMessage] = useState('');
-    const [userId, setUserId] = useState<number | null>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -28,8 +27,15 @@ const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
             const result = await response.json();
 
             if (result.success) {
-                setUserId(result.user_id);
+                const user = {
+                    user_id: result.user_id,
+                    username: result.username,
+                    bio: result.bio ?? ''
+                };
                 setMessage(`Login successful`);
+                localStorage.setItem("user", JSON.stringify(user))
+                console.log('User logged in:', {username, password});
+                onLogin(user);
             } else {
                 setMessage("Invalid username or password.");
             }

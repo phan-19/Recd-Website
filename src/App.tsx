@@ -1,7 +1,8 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Navbar from './components/navbar/navbar';
+import UserLogin from './components/user-login/UserLogin'
 
 import Home from './pages/home/home'
 import Movies from './pages/movies/movies'
@@ -12,8 +13,26 @@ import Profile from './pages/profile/profile'
 import Login from './pages/login/login'
 import Signup from './pages/signup/signup'
 
+type User = {
+  user_id: number
+}
+
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+
+  //Verify that a user is logged in before rendering the page
+  const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        const stored = localStorage.getItem('user');
+        if (stored) {
+            setUser(JSON.parse(stored));
+        }
+    }, []);
+
+    if (!user) {
+        return <Login onLogin={(user: User) => (setUser(user))}/>
+    }
 
   const renderPage = () => {
     if (currentPage === 'home') {
@@ -27,7 +46,7 @@ function App() {
     } else if (currentPage === 'misc') {
       return <Misc />;
     } else if (currentPage === 'profile') {
-      return <Login />;
+      return <Profile />;
     }
     return null;
   }
