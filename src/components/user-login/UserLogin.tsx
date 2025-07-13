@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './UserLogin.css';
 
 type UserLoginProps = {
-    onLogin: (user: {user_id: number, username: string, bio: string}) => void;
+    onLogin: (user: {user_id: number, username: string}) => void;
 }
 
 const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
@@ -29,8 +29,7 @@ const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
             if (result.success) {
                 const user = {
                     user_id: result.user_id,
-                    username: result.username,
-                    bio: result.bio ?? ''
+                    username: result.username
                 };
                 setMessage(`Login successful`);
                 localStorage.setItem("user", JSON.stringify(user))
