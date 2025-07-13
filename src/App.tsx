@@ -2,7 +2,6 @@ import './App.css';
 import { useState, useEffect } from 'react';
 
 import Navbar from './components/navbar/navbar';
-import UserLogin from './components/user-login/UserLogin'
 
 import Home from './pages/home/home'
 import Movies from './pages/movies/movies'
@@ -23,16 +22,48 @@ function App() {
   //Verify that a user is logged in before rendering the page
   const [user, setUser] = useState<User | null>(null);
 
-    useEffect(() => {
-        const stored = localStorage.getItem('user');
-        if (stored) {
-            setUser(JSON.parse(stored));
-        }
-    }, []);
+  const [showSignup, setShowSignup] = useState(false);
 
-    if (!user) {
-        return <Login onLogin={(user: User) => (setUser(user))}/>
-    }
+  useEffect(() => {
+      const stored = localStorage.getItem('user');
+      if (stored) {
+          setUser(JSON.parse(stored));
+      }
+  }, []);
+
+  const handleLogin = (user: User) => {
+    setUser(user);
+    localStorage.setItem('user', JSON.stringify(user));
+  };
+
+  const handleSignup = (user: User) => {
+    setUser(user);
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  if (!user) {
+  return showSignup ? (
+    <>
+    <div className='form'>
+      <Signup onSignup={handleSignup} />
+      <p>
+        Already have an account?{' '}
+        <button onClick={() => setShowSignup(false)}>Log In</button>
+      </p>
+      </div>
+    </>
+  ) : (
+    <>
+    <div className='form'>
+      <Login onLogin={handleLogin} />
+      <p>
+        Don't have an account?{' '}
+        <button onClick={() => setShowSignup(true)}>Sign Up</button>
+      </p>
+      </div>
+    </>
+  );
+  }
 
   const renderPage = () => {
     if (currentPage === 'home') {

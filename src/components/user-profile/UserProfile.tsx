@@ -48,6 +48,7 @@ const UserProfile: React.FC = () => {
         localStorage.removeItem('user');
         setUser(null);
         setProfile(null);
+        window.location.reload();
     };
 
     if (loading) {
