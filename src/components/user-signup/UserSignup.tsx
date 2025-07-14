@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 import './UserSignup.css';
 
-type User = {
-  user_id: number;
-  username: string;
-  bio: string;
-};
-
-type UserSignupProps = {
-  onSignup: (user: User) => void;
-};
-
-const UserSignup: React.FC<UserSignupProps> = ({onSignup}) => {
+const UserSignup: React.FC = () => {
     const [username, setUsername] = useState(''); //p
     const [password, setPassword] = useState(''); //vrysecurepassword:D
     const [bio, setBio] = useState('');
@@ -40,13 +30,7 @@ const UserSignup: React.FC<UserSignupProps> = ({onSignup}) => {
             const result = await response.json();
 
             if (result.status === 'success') {
-                const newUser: User = {
-                    user_id: result.user_id,
-                    username,
-                    bio
-                }
-                setMessage('Signup was successful');
-                onSignup(newUser);
+                setMessage('Signup was successful. Please log in.');
             } else {
                 setMessage('Invalid username or password.');
             }
