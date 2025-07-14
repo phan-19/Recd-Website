@@ -1,19 +1,9 @@
 import UserSignup from "../../components/user-signup/UserSignup";
 
-type User = {
-  user_id: number;
-  username: string;
-  bio: string;
-};
-
-type SignupProps = {
-  onSignup: (user: User) => void;
-};
-
-export default function Signup({ onSignup }: SignupProps) {
+export default function Signup() {
   return (
     <main>
-      <UserSignup onSignup={onSignup} />
+      <UserSignup />
     </main>
   );
 }
