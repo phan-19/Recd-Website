@@ -39,7 +39,7 @@ function App() {
   const handleSignup = (user: User) => {
     setUser(user);
     localStorage.setItem('user', JSON.stringify(user));
-  }
+  };
 
   if (!user) {
   return showSignup ? (
