@@ -6,19 +6,22 @@ import SearchBar from '../assets/search-bar/SearchBar';
 interface NavbarProps {
     setCurrentPage: (page: string) => void;
     currentPage: string;
+    onSubmitSearch: (query: string) => void;
 }
 
-export default function Navbar({ setCurrentPage, currentPage }: NavbarProps) {
+export default function Navbar({ setCurrentPage, currentPage, onSubmitSearch }: NavbarProps) {
     const isActive = (page: string) => currentPage === page ? 'active' : '';
 
-    function handleSearch(userText: string): void {
-        throw new Error('Function not implemented.');
+    function handleSearch(): void {
     }
 
     return (
         <nav className="navbar">
             <div className="search-bar-container">
-                <SearchBar onSearch={handleSearch}/>
+                <SearchBar 
+                    onSearch={handleSearch}
+                    onEnter={onSubmitSearch}
+                />
             </div>
             <div className="navbar-center">
                 
