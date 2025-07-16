@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import SearchBar from '../../components/assets/search-bar/SearchBar';
-import Card from '../../components/assets/card/Card';
+import MediaCard from '../../components/assets/cards/media-card/MediaCard';
+import UserCard from '../../components/assets/cards/user-card/UserCard';
 import './Search.css';
 
 type UserRes  = { user_ids: number[]; usernames: string[] };
@@ -24,13 +25,13 @@ export default function Search({ initialQuery = '' }: SearchProps) {
     }
 
     async function searchMedia(term: string): Promise<MediaRes> {
-      const response = await fetch(`http://66.231.155.18:3000/search/media/${encodeURIComponent(term)}`);
+      const response = await fetch(`http://localhost:3000/search/media/${encodeURIComponent(term)}`);
       if (!response.ok) throw new Error('Media fetch failed');
       return await response.json();
     }
 
     async function searchUsers(term: string): Promise<UserRes> {
-      const response = await fetch(`http://66.231.155.18:3000/search/user/${encodeURIComponent(term)}`);
+      const response = await fetch(`http://localhost:3000/search/user/${encodeURIComponent(term)}`);
       if (!response.ok) throw new Error('User fetch failed');
       return await response.json();
     }
@@ -68,14 +69,10 @@ export default function Search({ initialQuery = '' }: SearchProps) {
           <h3 className="font-semibold">Media</h3>
           <div className="card-row">
             {media.map(m => (
-              <Card
+              <MediaCard
                 key={m.id}
                 cardStyle="card"
-                title={m.name}
-                type="Media"
-                rating=""
-                description=""
-                image=""
+                id={m.id}
               />
             ))}
           </div>
@@ -88,14 +85,10 @@ export default function Search({ initialQuery = '' }: SearchProps) {
           <h3 className="font-semibold">Users</h3>
           <div className="card-row user-row">
             {users.map(u => (
-              <Card
+              <UserCard
                 key={u.id}
                 cardStyle="card"
-                title={u.username}
-                type="User"
-                rating=""
-                description=""
-                image=""
+                id={u.id}
               />
             ))}
           </div>

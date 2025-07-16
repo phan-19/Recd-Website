@@ -10,15 +10,15 @@ const UserSignup: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        var url = `http://66.231.155.18:3000/user`;
+        var url = `http://localhost:3000/user`;
 
         try {
             const options = {
                 method: 'POST',
-     	        headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, password, bio })
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password, bio })
             };
 
             var response = await fetch(url, options);
@@ -63,7 +63,7 @@ const UserSignup: React.FC = () => {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 required
-             />
+            />
             <button type="submit">Sign Up</button>
             {message && <p>{message}</p>}
         </form>

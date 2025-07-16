@@ -4,41 +4,63 @@
     max-width: 300px;
     min-height: 250px;
     max-height: 350px;
-    overflow: scroll;
+    overflow: hidden;
     background-color: rgb(66, 76, 71);
     box-shadow: 0 2px 5px black;
 }
 
-.card-image {
-    width: 100%;
-    height: auto;
-}
-
 .card-content {
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
-.card-title {
+.card-media-name {
+    padding: 0%;
+    background: none;
+    border: none;
+    text-align: left;
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
 }
 
-.card-type {
-    margin: 0.25rem 0;
+.card-media-name:hover {
+    color: rgb(164, 255, 168);
+}
+
+.card-username {
+    padding: 0%;
+    background: none;
+    border: none;
+    text-align: left;
+    margin: 0.1rem 0;
     font-size: 0.9rem;
     color: grey;
 }
 
-.card-rating {
-    margin: 0.25rem 0;
+.card-username-button {
+    padding: 0%;
+    background: none;
+    border: none;
+    text-align: left;
+    margin: 0.1rem 0;
     font-size: 0.9rem;
+    color: grey;
+}
+
+.card-username-button:hover {
+    color: rgb(164, 255, 168);
+}
+
+.card-rating {
+    margin: 0.1rem 0;
+    font-size: 1.1rem;
 }
 
 .card-description {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #d0d0d0;
-    max-height: 100px;
-    overflow: scroll;
+    max-height: 6rem;
+    min-height: 8rem;
+    overflow-y: scroll;
 }
 
 /* Card Resizing for different screen sizes */
@@ -51,6 +73,7 @@
     .card {
         flex-basis: calc(50% - 10px);
     }
+
     .card:not(:last-child) {
         margin-right: 4px;
     }
@@ -60,6 +83,7 @@
     .card {
         flex-basis: calc(calc(100% / 3) - 20px);
     }
+
     .card:not(:last-child) {
         margin-right: 8px;
     }
@@ -69,6 +93,7 @@
     .card {
         flex-basis: calc(25% - 30px);
     }
+
     .card:not(:last-child) {
         margin-right: 12px;
     }

@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import './UserLogin.css';
 
 type UserLoginProps = {
-    onLogin: (user: {user_id: number, username: string}) => void;
+    onLogin: (user: { user_id: number, username: string }) => void;
 }
 
-const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
-    const [username, setUsername] = useState(''); //p
-    const [password, setPassword] = useState(''); //vrysecurepassword:D
+const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
+    const [username, setUsername] = useState(''); 
+    const [password, setPassword] = useState(''); 
     const [message, setMessage] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const url = `http://66.231.155.18:3000/login/${username}/${password}`;
+        const url = `http://localhost:3000/login/${username}/${password}`;
 
         try {
             const response = await fetch(url, {

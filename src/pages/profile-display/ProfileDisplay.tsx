@@ -1,59 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import './UserProfile.css'
-
-type User = {
-    user_id: number,
-    username: string
-};
 
 type Profile = {
     user_id: number,
     username: string,
-    bio: string
-}
+    bio: string,
+    reviews: number[],
+};
 
 const UserProfile: React.FC = () => {
-    const [user, setUser] = useState<User | null>(null);
     const [profile, setProfile] = useState<Profile | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const stored = localStorage.getItem('user');
+        const stored = localStorage.getItem('item');
         if (stored) {
-            const storedUser: User = JSON.parse(stored);
-            setUser(storedUser);
+            const storedProfile: Profile = JSON.parse(stored);
+            setProfile(storedProfile); 
 
-            fetch(`http://localhost:3000/page/user/${storedUser.user_id}`)
+            fetch(`http://localhost:3000/page/user/${storedProfile.user_id}`)
                 .then(response => response.json())
                 .then(data => {
                     setProfile(data);
+                    setLoading(false);
                 })
                 .catch(err => {
-                    console.error('Failed to fetch profile:', err);
+                    console.error('Failed to fetch item:', err);
+                    setLoading(false);
                 });
-            setLoading(false);
         } else {
             setLoading(false);
         }
     }, []);
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        setUser(null);
-        setProfile(null);
-        window.location.reload();
-    };
-
     if (loading) {
-        return <p>Loading...</p>;
-    }
-
-    if (!user) {
-        return <p>No user found on local device.</p>;
+        return <p>Loading...</p>; 
     }
 
     if (!profile) {
-        return <p>Loading profile...</p>;
+        return <p>This profile could not be found.</p>;
     }
 
     return (
@@ -61,7 +45,6 @@ const UserProfile: React.FC = () => {
             <div className='profile-content'>
                 <h2 className='username'>{'@'}{profile.username}</h2>
                 <p className='bio'>{profile.bio}</p>
-                <button onClick={handleLogout}>Log Out</button>
             </div>
         </div>
     );

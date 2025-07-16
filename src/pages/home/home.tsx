@@ -1,56 +1,35 @@
 import './home.css';
 
-import Card from "../../components/assets/card/Card";
+import CardScroll from "../../components/assets/cards/card-scroll/CardScroll";
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+    const [reviews, setReviews] = useState([]);
+    const [media, setMedia] = useState([]);
+
+    useEffect(() => {
+        const loadHomePageData = async () => {
+            const response = await fetch("http://localhost:3000/page/home");
+            const result = await response.json();
+            setReviews(result.reviews);
+            setMedia(result.media);
+        }
+        loadHomePageData();
+    }, []);
+
     return (
         <main>
             <div>
                 <h2 className='section-title'>
                     Recommended
                 </h2>
-                <div className='card-scroll'>
-                    <Card
-                        cardStyle='card'
-                        title='Test Item 1'
-                        type='Film'
-                        rating='4.5/5'
-                        description='This is a test of the card feature. How does it look?'
-                        image='/the-batman.png'
-                    />
-                    <Card
-                        cardStyle="card"
-                        title='Test Item 2'
-                        type='Television Show'
-                        rating='3.0/5'
-                        description='This is a test of stacking card features. How does it look?'
-                        image=''
-                    />
-                    <Card 
-                        cardStyle='card'
-                        title='Test Item 3'
-                        type='Book'
-                        rating='5.0/5'
-                        description='This is a test of the scroll feature. How does it look?'
-                        image=''
-                    />
-                    <Card 
-                        cardStyle='card'
-                        title='Test Item 4'
-                        type='Album'
-                        rating='2.0/5'
-                        description='This is a test of scrolling. Please just scroll. This is also a test of text overflow. Testing overflow. Testing overflow. Testing overflow. Testing overflow. Size page down to see how overflow looks at different amounts.'
-                        image=''
-                    />
-                </div>
+                <CardScroll ids={media} card_type='media' />
                 <h2 className='section-title'>
-                    Recently Added
+                    Recent Activity
                 </h2>
-                <div className='card-scroll'>
-                    
-                </div>
+                <CardScroll ids={reviews} card_type='review' />
             </div>
         </main>
-        
+
     );
 }
