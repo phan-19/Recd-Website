@@ -32,6 +32,12 @@ const UserProfile: React.FC = () => {
         }
     }, []);
 
+    const handleExit = () => {
+        localStorage.removeItem('item');
+        setMedia(null);
+        window.location.reload();
+    };
+
     if (loading) {
         return <p>Loading...</p>; 
     }
@@ -47,6 +53,7 @@ const UserProfile: React.FC = () => {
                 <h4 className='medium'>{media.medium}</h4>
                 <p className='description'>{media.description}</p>
                 <button>Post a Review</button>
+                <button onClick={handleExit}>Go Back</button>
                 {/* Review scroll here - Feeling lazy rn */}
             </div>
         </div>

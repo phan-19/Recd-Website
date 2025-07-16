@@ -34,6 +34,12 @@ const UserProfile: React.FC = () => {
         }
     }, []);
 
+    const handleExit = () => {
+        localStorage.removeItem('item');
+        setReview(null);
+        window.location.reload();
+    };
+
     if (loading) {
         return <p>Loading...</p>; 
     }
@@ -49,6 +55,7 @@ const UserProfile: React.FC = () => {
                 <h4 className='user'>Posted by {review.username}</h4>
                 <p className='review'>{review.review_text}</p>
                 <h4 className='rating'>{review.rating}/5</h4>
+                <button onClick={handleExit}>Go Back</button>
             </div>
         </div>
     );

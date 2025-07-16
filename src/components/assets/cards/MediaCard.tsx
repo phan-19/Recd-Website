@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import './ReviewCard.css'
+import './Card.css'
 
 type CardProps = {
     cardStyle: string,
     id: number
 }
 
-const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
-    const [user_id, setUserId] = useState<number | null>(null);
-    const [username, setUsername] = useState("");
+const MediaCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     const [media_id, setMediaId] = useState<number | null>(null);
     const [media_name, setMediaName] = useState("");
-    const [rating, setRating] = useState<number | null>(null);
-    const [review_txt, setReviewTxt] = useState("");
+    const [medium, setMedium] = useState("");
+    const [description, setDescription] = useState("");
 
     const loadCardData = async () => {
-        var url = `http://localhost:3000/review/${id}`;
+        var url = `http://localhost:3000/page/media/${id}`;
 
         try {
             var response = await fetch(url);
@@ -26,21 +24,17 @@ const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
 
             const result = await response.json();
 
-            setUserId(result.user_id);
-            setUsername(result.username);
             setMediaId(result.media_id);
             setMediaName(result.media_name);
-            setRating(result.rating);
-            setReviewTxt(result.review_txt);
+            setMedium(result.medium);
+            setDescription(result.description);
 
         } catch (error) {
             console.error("Retrieve review error:", error);
-            setUserId(-1);
-            setUsername("Error");
             setMediaId(-1);
             setMediaName("Error");
-            setRating(-1);
-            setReviewTxt("Error");
+            setMedium("Error");
+            setDescription("Error");
         }
     }
 
@@ -56,28 +50,15 @@ const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
         window.location.reload();
     };
 
-    const routeToUser = () => {
-        console.log('button');
-        const item = {
-            user_id: user_id,
-            type: 'user',
-        }
-        localStorage.setItem('item', JSON.stringify(item));
-        window.location.reload();
-    };
-
     return (
         <div className={cardStyle}>
             <div className='card-content'>
                 <button className='card-media-name' onClick={routeToMedia}>{media_name}</button>
-                <h4 className='card-username'>Review by: {' '}
-                    <button className='card-username-button' onClick={routeToUser}>{username}</button>
-                </h4>
-                <p className='card-rating'>{rating}/5</p>
-                <p className='card-description'>{review_txt}</p>
+                <p className='card-rating'>{medium}</p>
+                <p className='card-description'>{description}</p>
             </div>
         </div>
     );
 };
 
-export default ReviewCard;
+export default MediaCard;

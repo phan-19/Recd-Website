@@ -32,6 +32,12 @@ const UserProfile: React.FC = () => {
         }
     }, []);
 
+    const handleExit = () => {
+        localStorage.removeItem('item');
+        setProfile(null);
+        window.location.reload();
+    };
+
     if (loading) {
         return <p>Loading...</p>; 
     }
@@ -45,6 +51,7 @@ const UserProfile: React.FC = () => {
             <div className='profile-content'>
                 <h2 className='username'>{'@'}{profile.username}</h2>
                 <p className='bio'>{profile.bio}</p>
+                <button onClick={handleExit}>Go Back</button>
             </div>
         </div>
     );
