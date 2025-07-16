@@ -36,20 +36,14 @@ const MediaCard: React.FC<CardProps> = ({ cardStyle, id }) => {
 
     useEffect(() => { loadCardData(); }, []);
 
-    const routeToUser = () => {
-        console.log('button');
-        const item = {
-            user_id: user_id,
-            type: 'user',
-        }
-        localStorage.setItem('item', JSON.stringify(item));
-        window.location.reload();
+    const routeToMedia = () => {
+        console.log("button! :D");
     };
 
     return (
         <div className={cardStyle}>
             <div className='card-content'>
-                <button className='card-media-name' onClick={routeToUser}>{username}</button>
+                <button className='card-media-name' onClick={routeToMedia}>{username}</button>
                 <p className='card-description'>{bio}</p>
             </div>
         </div>

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import './UserLogin.css';
 
 type UserLoginProps = {
-    onLogin: (user: {user_id: number, username: string}) => void;
+    onLogin: (user: { user_id: number, username: string }) => void;
 }
 
-const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
+const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
     const [username, setUsername] = useState(''); //p
     const [password, setPassword] = useState(''); //vrysecurepassword:D
     const [message, setMessage] = useState('');
@@ -32,7 +32,7 @@ const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
                     username: result.username
                 };
                 setMessage(`Login successful`);
-                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("user", JSON.stringify(user))
                 console.log('User logged in:', {username, password});
                 onLogin(user);
             } else {

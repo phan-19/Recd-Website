@@ -45,7 +45,7 @@ const UserProfile: React.FC = () => {
     };
 
     if (loading) {
-        return <p>Loading...</p>; 
+        return <p>Loading...</p>;
     }
 
     if (!user) {

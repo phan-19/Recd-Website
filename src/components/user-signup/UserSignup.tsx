@@ -15,10 +15,10 @@ const UserSignup: React.FC = () => {
         try {
             const options = {
                 method: 'POST',
-     	        headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, password, bio })
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password, bio })
             };
 
             var response = await fetch(url, options);
@@ -63,7 +63,7 @@ const UserSignup: React.FC = () => {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 required
-             />
+            />
             <button type="submit">Sign Up</button>
             {message && <p>{message}</p>}
         </form>
