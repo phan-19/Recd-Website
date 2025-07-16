@@ -6,8 +6,8 @@ type UserLoginProps = {
 }
 
 const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
-    const [username, setUsername] = useState(''); //p
-    const [password, setPassword] = useState(''); //vrysecurepassword:D
+    const [username, setUsername] = useState(''); 
+    const [password, setPassword] = useState(''); 
     const [message, setMessage] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
