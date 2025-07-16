@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './UserProfile.css'
 
-import UserLogin from '../user-login/UserLogin';
-
 type User = {
     user_id: number,
     username: string
@@ -39,11 +37,6 @@ const UserProfile: React.FC = () => {
         }
     }, []);
 
-    const handleLogin = (user: User) => {
-        setUser(user);
-        localStorage.setItem('user', JSON.stringify(user));
-    };
-
     const handleLogout = () => {
         localStorage.removeItem('user');
         setUser(null);
@@ -56,7 +49,7 @@ const UserProfile: React.FC = () => {
     }
 
     if (!user) {
-        return <UserLogin onLogin={handleLogin} />;
+        return <p>No user found on local device.</p>;
     }
 
     if (!profile) {

@@ -39,16 +39,11 @@ function App() {
     localStorage.setItem('user', JSON.stringify(user));
   };
 
-  const handleSignup = (user: User) => {
-    setUser(user);
-    localStorage.setItem('user', JSON.stringify(user));
-  }
-
   if (!user) {
   return showSignup ? (
     <>
     <div className='form'>
-      <Signup onSignup={handleSignup} />
+      <Signup />
       <p>
         Already have an account?{' '}
         <button onClick={() => setShowSignup(false)}>Log In</button>
