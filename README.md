@@ -10,15 +10,15 @@
 * Porter Hanley - Development Team Member
 
 ## Instructions
-To run website:
-npm install (if not installed already)
+To run website: <br>
+npm install (if not installed already) <br>
 npm run dev
 
 Server repo
 *https://github.com/phan-19/Recd-Server*
 
-To run server:
-- move updated database file into the file tree - (optional)
+To run server: <br>
+move updated database file into the file tree (optional) <br>
 cargo run
 
 ## Info
