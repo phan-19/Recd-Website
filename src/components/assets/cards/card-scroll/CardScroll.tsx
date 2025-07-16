@@ -10,6 +10,9 @@ type CardScrollProps = {
 
 const CardScroll: React.FC<CardScrollProps> = ({ ids, card_type }) => {
     const LoadCards = (ids: number[], card_type: string) => {
+        if (!ids) {
+            return null;
+        }
         switch (card_type) {
             case "review":
                 return ids.map((id, index) => (<ReviewCard key={index} cardStyle='card' id={id} />));

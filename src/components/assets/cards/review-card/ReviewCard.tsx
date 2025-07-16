@@ -15,7 +15,7 @@ const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     const [review_txt, setReviewTxt] = useState("");
 
     const loadCardData = async () => {
-        var url = `http://66.231.155.18:3000/review/${id}`;
+        var url = `http://localhost:3000/review/${id}`;
 
         try {
             var response = await fetch(url);
@@ -48,6 +48,22 @@ const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
 
     const routeToMedia = () => {
         console.log("button! :D");
+        const item = {
+            media_id: media_id,
+            type: 'media'
+        };
+        localStorage.setItem("item", JSON.stringify(item));
+        window.location.reload();
+    };
+
+    const routeToUser = () => {
+        console.log('button');
+        const item = {
+            user_id: user_id,
+            type: 'user',
+        }
+        localStorage.setItem('item', JSON.stringify(item));
+        window.location.reload();
     };
 
     return (
@@ -55,7 +71,7 @@ const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
             <div className='card-content'>
                 <button className='card-media-name' onClick={routeToMedia}>{media_name}</button>
                 <h4 className='card-username'>Review by: {' '}
-                    <button className='card-username-button' onClick={routeToMedia}>{username}</button>
+                    <button className='card-username-button' onClick={routeToUser}>{username}</button>
                 </h4>
                 <p className='card-rating'>{rating}/5</p>
                 <p className='card-description'>{review_txt}</p>

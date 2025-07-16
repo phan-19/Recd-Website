@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './MediaDisplay.css'
 
 type Media = {
     media_id: number,
@@ -14,7 +13,7 @@ const UserProfile: React.FC = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const stored = localStorage.getItem('currItem');
+        const stored = localStorage.getItem('item');
         if (stored) {
             const storedMedia: Media = JSON.parse(stored);
             setMedia(storedMedia);

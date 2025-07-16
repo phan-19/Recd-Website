@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './MediaCard.css'
+import './UserCard.css'
 
 type CardProps = {
     cardStyle: string,
@@ -13,7 +13,7 @@ const MediaCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     const [description, setDescription] = useState("");
 
     const loadCardData = async () => {
-        var url = `http://66.231.155.18:3000/page/media/${id}`;
+        var url = `http://localhost:3000/page/media/${id}`;
 
         try {
             var response = await fetch(url);

@@ -32,7 +32,7 @@ const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
                     username: result.username
                 };
                 setMessage(`Login successful`);
-                localStorage.setItem("user", JSON.stringify(user))
+                localStorage.setItem("user", JSON.stringify(user));
                 console.log('User logged in:', {username, password});
                 onLogin(user);
             } else {

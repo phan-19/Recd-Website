@@ -13,7 +13,7 @@ const MediaCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     const [description, setDescription] = useState("");
 
     const loadCardData = async () => {
-        var url = `http://66.231.155.18:3000/page/media/${id}`;
+        var url = `http://localhost:3000/page/media/${id}`;
 
         try {
             var response = await fetch(url);
@@ -42,6 +42,12 @@ const MediaCard: React.FC<CardProps> = ({ cardStyle, id }) => {
 
     const routeToMedia = () => {
         console.log("button! :D");
+        const item = {
+            media_id: media_id,
+            type: 'media'
+        };
+        localStorage.setItem("item", JSON.stringify(item));
+        window.location.reload();
     };
 
     return (
