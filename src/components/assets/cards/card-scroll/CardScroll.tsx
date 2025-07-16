@@ -1,6 +1,7 @@
 import React from 'react';
 import ReviewCard from '../review-card/ReviewCard';
 import MediaCard from '../media-card/MediaCard';
+import UserCard from '../user-card/UserCard';
 import './CardScoll.css';
 
 type CardScrollProps = {
@@ -16,7 +17,7 @@ const CardScroll: React.FC<CardScrollProps> = ({ ids, card_type }) => {
             case "media":
                 return ids.map((id, index) => (<MediaCard key={index} cardStyle='card' id={id} />));
             case "user":
-                break;
+                return ids.map((id, index) => (<UserCard key={index} cardStyle='card' id={id} />));
         }
     }
 

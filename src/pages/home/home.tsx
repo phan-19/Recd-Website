@@ -9,7 +9,7 @@ export default function Home() {
 
     useEffect(() => {
         const loadHomePageData = async () => {
-            const response = await fetch("http://66.231.155.18:3000/page/home");
+            const response = await fetch("http://localhost:3000/page/home");
             const result = await response.json();
             setReviews(result.reviews);
             setMedia(result.media);

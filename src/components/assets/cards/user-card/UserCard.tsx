@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './MediaCard.css'
+import './UserCard.css'
 
 type CardProps = {
     cardStyle: string,
@@ -7,13 +7,12 @@ type CardProps = {
 }
 
 const MediaCard: React.FC<CardProps> = ({ cardStyle, id }) => {
-    const [media_id, setMediaId] = useState<number | null>(null);
-    const [media_name, setMediaName] = useState("");
-    const [medium, setMedium] = useState("");
-    const [description, setDescription] = useState("");
+    const [user_id, setUserID] = useState<number | null>(null);
+    const [username, setUsername] = useState("");
+    const [bio, setBio] = useState("");
 
     const loadCardData = async () => {
-        var url = `http://66.231.155.18:3000/page/media/${id}`;
+        var url = `http://localhost:3000/page/user/${id}`;
 
         try {
             var response = await fetch(url);
@@ -24,17 +23,14 @@ const MediaCard: React.FC<CardProps> = ({ cardStyle, id }) => {
 
             const result = await response.json();
 
-            setMediaId(result.media_id);
-            setMediaName(result.media_name);
-            setMedium(result.medium);
-            setDescription(result.description);
-
+            setUserID(result.user_id);
+            setUsername(result.username);
+            setBio(result.bio);
         } catch (error) {
             console.error("Retrieve review error:", error);
-            setMediaId(-1);
-            setMediaName("Error");
-            setMedium("Error");
-            setDescription("Error");
+            setUserID(-1);
+            setUsername("Error");
+            setBio("Error");
         }
     }
 
@@ -47,9 +43,8 @@ const MediaCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     return (
         <div className={cardStyle}>
             <div className='card-content'>
-                <button className='card-media-name' onClick={routeToMedia}>{media_name}</button>
-                <p className='card-rating'>{medium}</p>
-                <p className='card-description'>{description}</p>
+                <button className='card-media-name' onClick={routeToMedia}>{username}</button>
+                <p className='card-description'>{bio}</p>
             </div>
         </div>
     );

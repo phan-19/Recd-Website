@@ -15,7 +15,7 @@ const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     const [review_txt, setReviewTxt] = useState("");
 
     const loadCardData = async () => {
-        var url = `http://66.231.155.18:3000/review/${id}`;
+        var url = `http://localhost:3000/review/${id}`;
 
         try {
             var response = await fetch(url);

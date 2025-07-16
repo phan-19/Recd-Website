@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import './UserLogin.css';
 
 type UserLoginProps = {
-    onLogin: (user: {user_id: number, username: string}) => void;
+    onLogin: (user: { user_id: number, username: string }) => void;
 }
 
-const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
+const UserLogin: React.FC<UserLoginProps> = ({ onLogin }) => {
     const [username, setUsername] = useState(''); //p
     const [password, setPassword] = useState(''); //vrysecurepassword:D
     const [message, setMessage] = useState('');
@@ -13,7 +13,7 @@ const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const url = `http://66.231.155.18:3000/login/${username}/${password}`;
+        const url = `http://localhost:3000/login/${username}/${password}`;
 
         try {
             const response = await fetch(url, {
@@ -33,7 +33,7 @@ const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
                 };
                 setMessage(`Login successful`);
                 localStorage.setItem("user", JSON.stringify(user))
-                console.log('User logged in:', {username, password});
+                console.log('User logged in:', { username, password });
                 onLogin(user);
             } else {
                 setMessage("Invalid username or password.");
