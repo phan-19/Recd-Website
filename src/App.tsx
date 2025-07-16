@@ -11,9 +11,15 @@ import Misc from './pages/misc/misc'
 import Profile from './pages/profile/profile'
 import Login from './pages/login/login'
 import Signup from './pages/signup/signup'
+import MediaDisplay from './components/media-display/MediaDisplay'
 
 type User = {
   user_id: number
+}
+
+type Item = {
+  item_id: number,
+  type: string,
 }
 
 function App() {
@@ -59,8 +65,29 @@ function App() {
     </>
   );
   }
+  //End login logic
 
+  // Check if the user is viewing a specific item (media, review, profile)
+
+  const [ item, setItem ] = useState<Item | null>(null);
+  
+  useEffect(() => {
+    const stored = localStorage.getItem('currItem');
+    if (stored) {
+      setItem(JSON.parse(stored));
+    }
+  }, []);
+
+  //Page rendering logic
   const renderPage = () => {
+    if (item && item.type === 'media') {
+      return <MediaDisplay />;
+    } else if (item && item.type === 'profile') {
+      return <p>Other user profile will display here</p>;
+    } else if (item && item.type === 'review') {
+      return <p>Review will display here</p>
+    }
+
     if (currentPage === 'home') {
       return <Home />;
     } else if (currentPage === 'movies') {
