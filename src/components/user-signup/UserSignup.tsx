@@ -10,7 +10,7 @@ const UserSignup: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        var url = `http://localhost:3000/user`;
+        var url = `http://66.231.155.18:3000/user`;
 
         try {
             const options = {

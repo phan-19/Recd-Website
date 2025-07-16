@@ -13,7 +13,7 @@ const UserLogin: React.FC<UserLoginProps> = ({onLogin}) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const url = `http://localhost:3000/login/${username}/${password}`;
+        const url = `http://66.231.155.18:3000/login/${username}/${password}`;
 
         try {
             const response = await fetch(url, {

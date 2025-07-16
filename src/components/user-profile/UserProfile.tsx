@@ -23,7 +23,7 @@ const UserProfile: React.FC = () => {
             const storedUser: User = JSON.parse(stored);
             setUser(storedUser);
 
-            fetch(`http://localhost:3000/page/user/${storedUser.user_id}`)
+            fetch(`http://66.231.155.18:3000/page/user/${storedUser.user_id}`)
                 .then(response => response.json())
                 .then(data => {
                     setProfile(data);

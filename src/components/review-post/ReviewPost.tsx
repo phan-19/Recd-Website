@@ -20,7 +20,7 @@ const ReviewPost: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        var url = `http://localhost:3000/review/`;
+        var url = `http://66.231.155.18:3000/review/`;
 
         var stored = localStorage.getItem('user');
         if (stored) {
