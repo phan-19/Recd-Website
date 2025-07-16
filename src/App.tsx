@@ -11,6 +11,7 @@ import Misc from './pages/misc/misc'
 import Profile from './pages/profile/profile'
 import Login from './pages/login/login'
 import Signup from './pages/signup/signup'
+import Search from './pages/search/search';
 
 type User = {
   user_id: number
@@ -23,6 +24,8 @@ function App() {
   const [user, setUser] = useState<User | null>(null);
 
   const [showSignup, setShowSignup] = useState(false);
+
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
       const stored = localStorage.getItem('user');
@@ -73,6 +76,8 @@ function App() {
       return <Misc />;
     } else if (currentPage === 'profile') {
       return <Profile />;
+    } else if (currentPage === 'search') {
+      return <Search initialQuery={searchTerm} />;
     }
     return null;
   }
@@ -80,7 +85,14 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage}></Navbar>
+        <Navbar 
+          currentPage={currentPage} 
+          setCurrentPage={setCurrentPage} 
+          onSubmitSearch={(q) => {
+            setSearchTerm(q);
+            setCurrentPage('search');
+          }}
+        />
       </header>
       <div>
       {renderPage()}

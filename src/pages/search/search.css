@@ -1,0 +1,37 @@
+.search-page {
+  padding: 1rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.status {
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+.status.error { color: #c00; }
+
+.card-row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 0.5rem 0 1rem;
+  scroll-snap-type: x mandatory;
+}
+
+.card-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.media-row {}
+
+.user-row .card {
+  width: 120px;
+}
+.user-row .card-image {
+  height: 80px;
+}
+.user-row .card-title { font-size: 0.95rem; }
