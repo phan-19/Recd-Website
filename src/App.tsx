@@ -30,7 +30,6 @@ function App() {
   const [user, setUser] = useState<User | null>(null);
   const [showSignup, setShowSignup] = useState(false);
   const [item, setItem] = useState<Item | null>(null); 
-
   const [searchTerm, setSearchTerm] = useState('');
 
   // Load user from localStorage
