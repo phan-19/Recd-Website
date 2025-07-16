@@ -9,7 +9,17 @@
 * Joshua Austin Land - Scrum Master
 * Porter Hanley - Development Team Member
 
-## CHECK CLOSED PULL REQUESTS PLEASE
+## Instructions
+To run website:
+npm install (if not installed already)
+npm run dev
 
 Server repo
 *https://github.com/phan-19/Recd-Server*
+
+To run server:
+- move updated database file into the file tree - (optional)
+cargo run
+
+## Info
+I (Jules) am in the process of refactoring the website code! If working in a separate branch, pull from main often or stay out of existing files please.
