@@ -12,6 +12,7 @@
 ## Instructions
 To run website: <br>
 npm install (if not installed already) <br>
+npm install react-router-dom (do once) <br>
 npm run dev
 
 Server repo
