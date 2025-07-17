@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import SearchBar from '../../components/assets/search-bar/SearchBar';
+import MediaForm from '../../components/media-form/MediaForm'
 import MediaCard from '../../components/cards/MediaCard';
 import UserCard from '../../components/cards/UserCard';
 import './Search.css';
@@ -24,6 +25,8 @@ export default function Search({ initialQuery = '' }: SearchProps) {
   const [ users,  setUsers ] = useState<{ id: number; username: string }[]>([]);
   const [ loading, setLoading ] = useState(false);
   const [ err, setErr ] = useState('');
+
+  const [ postMedia, setPostMedia ] = useState(false);
 
   useEffect(() => setQuery(initialQuery), [initialQuery]);
 
@@ -61,6 +64,11 @@ export default function Search({ initialQuery = '' }: SearchProps) {
     return () => clearTimeout(timer);
   }, [query]);
 
+  // Here is the form and logic for a user posting media
+  const togglePostMedia = () => {
+    setPostMedia(!postMedia);
+  }
+
   return (
     <main className="p-4 space-y-6">
       <h2 className="section-title text-xl font-bold">Search</h2>
@@ -72,6 +80,10 @@ export default function Search({ initialQuery = '' }: SearchProps) {
 
       {loading && <p className="italic text-sm">Searching…</p>}
       {err &&     <p className="text-red-600">{err}</p>}
+
+      {/* ---------- Post Media --------- */}
+
+      <button type="button" onClick={togglePostMedia}>Add an Item</button>
 
       {/* ---------- Media row ---------- */}
       {!!media.length && (
@@ -103,6 +115,18 @@ export default function Search({ initialQuery = '' }: SearchProps) {
             ))}
           </div>
         </>
+      )}
+
+      {postMedia && (
+        <div>
+            {postMedia && (
+                <div className='overlay'>
+                    <div className='overlay-component'>
+                        <MediaForm onClose={togglePostMedia} />
+                    </div>
+                </div>
+            )}
+          </div>
       )}
     </main>
   );
