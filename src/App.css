@@ -1,9 +1,5 @@
-.form {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.auth-page .form-container .prompt {
+  margin-top: 1rem;
+  color: #d4d4d4;
   text-align: center;
-  padding-top: 2rem;
 }

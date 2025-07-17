@@ -1,12 +1,64 @@
-body, html {
+.auth-page body, html {
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
-main {
+.auth-page main {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.auth-page .signup-title {
+    color: #272727;
+    font-size: 2rem;
+    font-weight: normal;
+    margin: 1rem auto;
+    width: 50%;
+    text-align: center;
+}
+
+.auth-page .user-signup {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 2.5%;
+    background: #f2f2f2;
+}
+
+.auth-page .user-signup input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.auth-page .user-signup button {
+    padding: 10px;
+    background-color: #366b4b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.auth-page .user-signup button:hover {
+    background-color: #28543f;
+}
+
+.auth-page .user-signup p {
+    color: #272727;
+}
+
+.auth-page .user-signup .bio {
+    height: 250px;
+    resize: vertical;
+    overflow-y: auto;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }

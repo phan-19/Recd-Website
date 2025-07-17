@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './ReviewCard.css'
+import { useNavigate, useLocation } from 'react-router-dom';
+import './Card.css'
 
 type CardProps = {
     cardStyle: string,
@@ -14,25 +15,25 @@ const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     const [rating, setRating] = useState<number | null>(null);
     const [review_txt, setReviewTxt] = useState("");
 
-    const loadCardData = async () => {
-        var url = `http://localhost:3000/review/${id}`;
+    const navigate = useNavigate();
+    const location = useLocation();
 
+    useEffect(() => {
+        const loadCardData = async () => {
+        const url = `http://localhost:3000/review/${id}`;
         try {
-            var response = await fetch(url);
-
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
             const result = await response.json();
-
             setUserId(result.user_id);
             setUsername(result.username);
             setMediaId(result.media_id);
             setMediaName(result.media_name);
             setRating(result.rating);
             setReviewTxt(result.review_txt);
-
         } catch (error) {
             console.error("Retrieve review error:", error);
             setUserId(-1);
@@ -41,37 +42,28 @@ const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
             setMediaName("Error");
             setRating(-1);
             setReviewTxt("Error");
-        }
-    }
+        }};
+        loadCardData();
+    }, [id]);
 
-    useEffect(() => { loadCardData(); }, []);
-
-    const routeToMedia = () => {
-        console.log("button! :D");
-        const item = {
-            media_id: media_id,
-            type: 'media'
-        };
-        localStorage.setItem("item", JSON.stringify(item));
-        window.location.reload();
+    const handleMediaClick = () => {
+        navigate(`/media/${media_id}`, {
+            state: { backgroundLocation: location },
+        });
     };
 
-    const routeToUser = () => {
-        console.log('button');
-        const item = {
-            user_id: user_id,
-            type: 'user',
-        }
-        localStorage.setItem('item', JSON.stringify(item));
-        window.location.reload();
+    const handleUserClick = () => {
+        navigate(`/user/${user_id}`, {
+            state: { backgroundLocation: location },
+        });
     };
 
     return (
         <div className={cardStyle}>
             <div className='card-content'>
-                <button className='card-media-name' onClick={routeToMedia}>{media_name}</button>
+                <button className='card-media-name' onClick={handleMediaClick}>{media_name}</button>
                 <h4 className='card-username'>Review by: {' '}
-                    <button className='card-username-button' onClick={routeToUser}>{username}</button>
+                    <button className='card-username-button' onClick={handleUserClick}>{username}</button>
                 </h4>
                 <p className='card-rating'>{rating}/5</p>
                 <p className='card-description'>{review_txt}</p>

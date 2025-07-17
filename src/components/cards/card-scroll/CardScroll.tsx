@@ -1,7 +1,7 @@
 import React from 'react';
-import ReviewCard from '../review-card/ReviewCard';
-import MediaCard from '../media-card/MediaCard';
-import UserCard from '../user-card/UserCard';
+import ReviewCard from '../ReviewCard';
+import MediaCard from '../MediaCard';
+import UserCard from '../UserCard';
 import './CardScoll.css';
 
 type CardScrollProps = {

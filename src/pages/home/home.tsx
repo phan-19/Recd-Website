@@ -1,7 +1,7 @@
+import { useState, useEffect } from 'react';
 import './home.css';
 
-import CardScroll from "../../components/assets/cards/card-scroll/CardScroll";
-import { useState, useEffect } from 'react';
+import CardScroll from "../../components/cards/card-scroll/CardScroll";
 
 export default function Home() {
     const [reviews, setReviews] = useState([]);

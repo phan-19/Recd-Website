@@ -1,19 +1,29 @@
 import { useEffect, useState } from 'react';
 import SearchBar from '../../components/assets/search-bar/SearchBar';
-import MediaCard from '../../components/assets/cards/media-card/MediaCard';
-import UserCard from '../../components/assets/cards/user-card/UserCard';
+import MediaCard from '../../components/cards/MediaCard';
+import UserCard from '../../components/cards/UserCard';
 import './Search.css';
 
-type UserRes  = { user_ids: number[]; usernames: string[] };
-type MediaRes = { media_ids: number[]; names: string[] };
-type SearchProps = { initialQuery?: string };
+type UserRes  = { 
+  user_ids: number[]; 
+  usernames: string[] 
+};
+
+type MediaRes = { 
+  media_ids: number[]; 
+  names: string[]
+};
+
+type SearchProps = { 
+  initialQuery?: string 
+};
 
 export default function Search({ initialQuery = '' }: SearchProps) {
-  const [query,  setQuery]  = useState(initialQuery);
-  const [media,  setMedia]  = useState<{ id: number; name: string }[]>([]);
-  const [users,  setUsers]  = useState<{ id: number; username: string }[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [err,    setErr]    = useState('');
+  const [ query,  setQuery ] = useState(initialQuery);
+  const [ media,  setMedia ] = useState<{ id: number; name: string }[]>([]);
+  const [ users,  setUsers ] = useState<{ id: number; username: string }[]>([]);
+  const [ loading, setLoading ] = useState(false);
+  const [ err, setErr ] = useState('');
 
   useEffect(() => setQuery(initialQuery), [initialQuery]);
 
@@ -35,8 +45,8 @@ export default function Search({ initialQuery = '' }: SearchProps) {
       if (!response.ok) throw new Error('User fetch failed');
       return await response.json();
     }
-
     setLoading(true);
+
     const timer = setTimeout(() => {
       Promise.all([searchMedia(query), searchUsers(query)])
         .then(([m, u]) => {
