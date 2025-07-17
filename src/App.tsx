@@ -14,7 +14,6 @@ type User = {
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [showSignup, setShowSignup] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const stored = localStorage.getItem('user');
@@ -43,7 +42,7 @@ function App() {
       <div className="auth-page">
         <div className="form-container">
           <Login onLogin={handleLogin} />
-          <p>
+          <p className='prompt'>
             Don't have an account?{' '}
             <button onClick={() => setShowSignup(true)}>Sign Up</button>
           </p>
@@ -54,10 +53,7 @@ function App() {
 
   return (
     <Router>
-      <AppRoutes
-        searchTerm={searchTerm}
-        onSubmitSearch={(q) => setSearchTerm(q)}
-      />
+      <AppRoutes/>
     </Router>
   );
 }

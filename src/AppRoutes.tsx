@@ -7,24 +7,21 @@ import Shows from './pages/shows/shows';
 import Books from './pages/books/books';
 import Misc from './pages/misc/misc';
 import Profile from './pages/profile/profile';
+import Search from './pages/search/search'
+
+//Overlays
 import ReviewDisplay from './components/overlays/review-display/ReviewDisplay';
-import Search from './pages/search/search';
 import MediaOverlay from './components/overlays/media-display/MediaOverlay'
 import ProfileOverlay from './components/overlays/profile-display/ProfileOverlay';
 
-type AppRoutesProps = {
-  searchTerm: string;
-  onSubmitSearch: (q: string) => void;
-};
-
-const AppRoutes: React.FC<AppRoutesProps> = ({ searchTerm, onSubmitSearch, }) => {
+const AppRoutes: React.FC = () => {
   const location = useLocation();
   const state = location.state as { backgroundLocation?: Location };
 
   return (
     <div className="App">
       <header>
-        <Navbar onSubmitSearch={onSubmitSearch} />
+        <Navbar />
       </header>
       <main>
         <Routes location={state?.backgroundLocation || location}>
@@ -34,7 +31,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ searchTerm, onSubmitSearch, }) =>
           <Route path="/books" element={<Books />} />
           <Route path="/misc" element={<Misc />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/search" element={<Search initialQuery={searchTerm} />} />
+          <Route path="/search" element={<Search />}/>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 

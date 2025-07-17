@@ -57,9 +57,10 @@ const UserSignup: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
             />
-            <input
-                type="text"
-                placeholder="bio"
+            <textarea 
+                className='bio'
+                maxLength={250}
+                placeholder='bio'
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 required

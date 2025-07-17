@@ -2,13 +2,8 @@ import './Navbar.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import Button from '../assets/button/Button';
-import SearchBar from '../assets/search-bar/SearchBar';
 
-interface NavbarProps {
-  onSubmitSearch: (query: string) => void;
-}
-
-export default function Navbar({ onSubmitSearch }: NavbarProps) {
+export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,19 +21,13 @@ export default function Navbar({ onSubmitSearch }: NavbarProps) {
 
   const isActive = (page: string) => (currentPage === page ? 'active' : '');
 
-  function handleSearch(query: string): void {
-    if (query.trim()) {
-      onSubmitSearch(query);
-      navigate('/search');
-    }
-  }
-
   return (
     <nav className="navbar">
-      <div className="search-bar-container">
-        <SearchBar 
-          onSearch={() => {}}
-          onEnter={handleSearch}
+      <div>
+        <Button
+            buttonStyle={`nav-button ${isActive('search')}`}
+            buttonText='SEARCH'
+            onClick={() => navigate('/search')}
         />
       </div>
       <div className="navbar-center"></div>

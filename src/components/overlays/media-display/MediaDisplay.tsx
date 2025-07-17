@@ -19,7 +19,6 @@ type Media = {
 const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
     const [media, setMedia] = useState<Media | null>(null);
     const [writingReview, setWritingReview] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         fetch(`http://localhost:3000/page/media/${media_id}`)
@@ -29,15 +28,13 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
             })
             .then(data => {
                 setMedia(data);
-                setError(null);
             })
             .catch(err => {
                 console.error('Failed to fetch item:', err);
-                setError('Failed to load media.');
                 setMedia(null);
             });
     }, [media_id]);
-    
+
     if (!media) {
         return (
             <div className="media-page overlay">
@@ -61,7 +58,6 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
                 <p className='description'>{media.description}</p>
                 <button type="button" onClick={toggleWriteReview}>Post a Review</button>
                 <button type='button' onClick={onClose}>Go Back</button>
-                {/* Review scroll here - Feeling lazy rn */}
             </div>
             {writingReview && (
                 <div className='overlay'>
@@ -70,6 +66,9 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
                     </div>
                 </div>
             )}
+            <div>
+                {/* Review scroll here - Feeling lazy rn */}
+            </div>
         </div>
     );
 }
