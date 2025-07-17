@@ -37,7 +37,6 @@ const UserProfile: React.FC = () => {
     const handleExit = () => {
         localStorage.removeItem('item');
         setReview(null);
-        window.location.reload();
     };
 
     if (loading) {

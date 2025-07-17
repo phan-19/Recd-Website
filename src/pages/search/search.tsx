@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import SearchBar from '../../components/assets/search-bar/SearchBar';
-import MediaCard from '../../components/assets/cards/MediaCard';
-import UserCard from '../../components/assets/cards/UserCard';
+import MediaCard from '../../components/cards/MediaCard';
+import UserCard from '../../components/cards/UserCard';
 import './Search.css';
 
 type UserRes  = { 

@@ -1,0 +1,51 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+}
+
+.overlay-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.media-content {
+    border: 1px solid #000;
+    width: 60%;
+    min-width: 300px;
+    border-radius: 2.5px;
+    margin: 0.5rem;
+    padding: 1rem;
+    background-color: rgb(66, 76, 71);
+    box-shadow: 0 2px 5px black;
+}
+
+.title {
+    margin: 0.25rem 0;
+    font-size: 2rem;
+    color: #d0d0d0;
+}
+
+.medium {
+    font-size: 0.8rem;
+    color: #a5a5a5;
+    max-height: 100px;
+    overflow: scroll;
+}
+
+.description {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #a5a5a5;
+    max-height: 100px;
+    overflow: scroll;
+}

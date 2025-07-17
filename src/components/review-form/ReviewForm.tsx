@@ -1,48 +1,34 @@
 import React, { useState } from 'react';
-import './ReviewPost.css';
+import './ReviewForm.css';
 
-type User = {
-    user_id: number
-}
+type ReviewFormProps = {
+    onClose: () => void;
+    media: {
+        media_id: number,
+        media_name: string
+    };
+};
 
-type Media = {
-    media_id: number,
-    media_name: string,
-}
-
-const ReviewPost: React.FC = () => {
-    const [user, setUser] = useState<User | null>(null);
-    const [media, setMedia] = useState<Media | null>(null);
-    const [rating, setRating] = useState(0);
-    const [review, setReview] = useState('');
-    const [message, setMessage] = useState('');
+const ReviewForm: React.FC<ReviewFormProps> = ({ onClose, media }) => {
+    const [ rating, setRating ] = useState(0);
+    const [ review_txt, setReview ] = useState('');
+    const [ message, setMessage ] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        var url = `http://localhost:3000/review/`;
+        var url = `http://localhost:3000/review`;
 
-        var stored = localStorage.getItem('user');
-        if (stored) {
-            const storedUser: User = JSON.parse(stored);
-            setUser(storedUser);
-        } else {
-            return <p>Error retrieving current user.</p>
+        const userStored = localStorage.getItem('user');
+        if (!userStored) {
+            setMessage('User not logged in.');
+            return;
         }
 
-        const user_id = user?.user_id;
+        const user = JSON.parse(userStored);
 
-        stored = null;
-
-        stored = localStorage.getItem('item');
-        if (stored) {
-            const storedMedia: Media = JSON.parse(stored);
-            setMedia(storedMedia);
-        } else {
-            return <p>Error retrieving current media.</p>;
-        }
-
-        const media_id = media?.media_id;
+        const user_id = user.user_id;
+        const media_name = media.media_name;
 
         try {
             const options = {
@@ -50,9 +36,10 @@ const ReviewPost: React.FC = () => {
                 headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ user_id, media_id, rating, review })
+            body: JSON.stringify({ user_id, media_name, rating, review_txt })
             };
 
+            console.log({ user_id, media_name, rating, review_txt });
             var response = await fetch(url, options);
 
             if (!response.ok) {
@@ -74,25 +61,28 @@ const ReviewPost: React.FC = () => {
 
     return (
         <form className="review-form" onSubmit={handleSubmit}>
-            <h2 className="review-title">Post a Review for ${media?.media_name}</h2>
+            <h2 className="review-title">Post a Review for {media.media_name}</h2>
             <input
                 type="text"
                 placeholder="review text"
-                value={review}
+                value={review_txt}
                 onChange={(e) => setReview(e.target.value)}
                 required
             />
             <input //I want to make this a small star rating thing later - Jules
                 type="number"
+                min="1"
+                max="5"
                 placeholder="Rating (out of 5)"
                 value={rating}
                 onChange={(e) => setRating(Number(e.target.value))}
                 required
             />
             <button type="submit">Post Review</button>
+            <button type="button" onClick={onClose}>Cancel</button>
             {message && <p>{message}</p>}
         </form>
     );
 };
 
-export default ReviewPost;
+export default ReviewForm;

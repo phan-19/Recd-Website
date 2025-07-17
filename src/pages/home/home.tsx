@@ -1,6 +1,6 @@
 import './home.css';
 
-import CardScroll from "../../components/assets/cards/card-scroll/CardScroll";
+import CardScroll from "../../components/cards/card-scroll/CardScroll";
 import { useState, useEffect } from 'react';
 
 export default function Home() {

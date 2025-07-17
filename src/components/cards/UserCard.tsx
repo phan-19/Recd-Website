@@ -43,7 +43,6 @@ const UserCard: React.FC<CardProps> = ({ cardStyle, id }) => {
             type: 'user',
         }
         localStorage.setItem('item', JSON.stringify(item));
-        window.location.reload();
     };
 
     return (
