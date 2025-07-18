@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import SearchBar from '../../components/assets/search-bar/SearchBar';
-import MediaForm from '../../components/media-form/MediaForm'
-import MediaCard from '../../components/cards/MediaCard';
-import UserCard from '../../components/cards/UserCard';
 import './Search.css';
+
+import SearchBar from '../../components/assets/search-bar/SearchBar';
+import MediaForm from '../../components/forms/media-form/MediaForm';
+import CardScroll from '../../components/cards/card-scroll/CardScroll';
+import Button from '../../components/assets/button/Button';
 
 type UserRes  = { 
   user_ids: number[]; 
@@ -23,7 +24,6 @@ export default function Search({ initialQuery = '' }: SearchProps) {
   const [ query,  setQuery ] = useState(initialQuery);
   const [ media,  setMedia ] = useState<{ id: number; name: string }[]>([]);
   const [ users,  setUsers ] = useState<{ id: number; username: string }[]>([]);
-  const [ loading, setLoading ] = useState(false);
   const [ err, setErr ] = useState('');
 
   const [ postMedia, setPostMedia ] = useState(false);
@@ -48,7 +48,6 @@ export default function Search({ initialQuery = '' }: SearchProps) {
       if (!response.ok) throw new Error('User fetch failed');
       return await response.json();
     }
-    setLoading(true);
 
     const timer = setTimeout(() => {
       Promise.all([searchMedia(query), searchUsers(query)])
@@ -58,63 +57,59 @@ export default function Search({ initialQuery = '' }: SearchProps) {
           setErr('');
         })
         .catch(() => setErr('Server error — please try again.'))
-        .finally(() => setLoading(false));
     }, 300);
 
     return () => clearTimeout(timer);
   }, [query]);
 
-  // Here is the form and logic for a user posting media
-  const togglePostMedia = () => {
-    setPostMedia(!postMedia);
-  }
-
   return (
-    <main className="p-4 space-y-6">
-      <h2 className="section-title text-xl font-bold">Search</h2>
-
-      <SearchBar
-        onSearch={setQuery}
-        onEnter={setQuery}
-      />
-
-      {loading && <p className="italic text-sm">Searching…</p>}
-      {err &&     <p className="text-red-600">{err}</p>}
-
-      {/* ---------- Post Media --------- */}
-
-      <button type="button" onClick={togglePostMedia}>Add an Item</button>
-
-      {/* ---------- Media row ---------- */}
-      {!!media.length && (
-        <>
-          <h3 className="font-semibold">Media</h3>
-          <div className="card-row">
-            {media.map(m => (
-              <MediaCard
-                key={m.id}
-                cardStyle="card"
-                id={m.id}
-              />
-            ))}
+    <main className='container-fluid p-4'>
+      {/* Search bar */}
+      <div className='row justify-content-center'>
+        <div className='col-lg-8 col-md-8 col-sm-12 mb-4'>
+          <div className='p-4 h-100 search-bar-container'>
+            <SearchBar
+            onSearch={setQuery}
+            onEnter={setQuery}
+            />
+            {err && <p className='text-red-600'>{err}</p>}
           </div>
-        </>
+        </div>
+      </div>
+
+      {/* Post Media Button */}
+      <div className="row justify-content-center mb-4">
+        <div className="col-lg-8 col-md-8 col-sm-12 text-end">
+          <Button
+            buttonStyle='add-item'
+            buttonText='Add an Item'
+            onClick={() => setPostMedia(!postMedia)}
+          />
+        </div>
+      </div>
+
+      {/* Media Row */}
+      {!!media.length && (
+        <section className='mb-5'>
+          <h3 className='mb-3 section-title'>Media Containing "{query}"</h3>
+          <div>
+            <CardScroll 
+              ids={media.map(m => m.id)} card_type='media'
+            />
+          </div>
+        </section>
       )}
 
-      {/* ---------- User row ---------- */}
+      {/* User Row */}
       {!!users.length && (
-        <>
-          <h3 className="font-semibold">Users</h3>
-          <div className="card-row user-row">
-            {users.map(u => (
-              <UserCard
-                key={u.id}
-                cardStyle="card"
-                id={u.id}
-              />
-            ))}
+        <section className='mb-5'>
+          <h3 className='mb-3 section-title'>Users Containing "{query}"</h3>
+          <div>
+            <CardScroll 
+              ids={media.map(m => m.id)} card_type='user'
+            />
           </div>
-        </>
+        </section>
       )}
 
       {postMedia && (
@@ -122,7 +117,7 @@ export default function Search({ initialQuery = '' }: SearchProps) {
             {postMedia && (
                 <div className='overlay'>
                     <div className='overlay-component'>
-                        <MediaForm onClose={togglePostMedia} />
+                        <MediaForm onClose={() => setPostMedia(!postMedia)} />
                     </div>
                 </div>
             )}

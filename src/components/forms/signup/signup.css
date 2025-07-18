@@ -5,13 +5,13 @@
 }
 
 .auth-page main {
-    height: 100vh;
+    min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.auth-page .login-title {
+.auth-page .signup-title {
     color: #272727;
     font-size: 2rem;
     font-weight: normal;
@@ -20,7 +20,7 @@
     text-align: center;
 }
 
-.auth-page .user-login {
+.auth-page .user-signup {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -31,13 +31,20 @@
     background: #f2f2f2;
 }
 
-.auth-page .user-login input {
+.auth-page .user-signup input,
+.auth-page .user-signup textarea {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.auth-page .user-login button {
+.auth-page .user-signup textarea {
+    height: 250px;
+    resize: vertical;
+    overflow-y: auto;
+}
+
+.auth-page .user-signup button {
     padding: 10px;
     background-color: #366b4b;
     color: white;
@@ -46,10 +53,10 @@
     cursor: pointer;
 }
 
-.auth-page .user-login button:hover {
+.auth-page .user-signup button:hover {
     background-color: #28543f;
 }
 
-.auth-page .user-login p {
+.auth-page .user-signup p {
     color: #272727;
 }

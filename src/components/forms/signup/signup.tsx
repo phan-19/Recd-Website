@@ -35,24 +35,24 @@ const UserSignup: React.FC = () => {
                 setMessage('Invalid username or password.');
             }
         } catch (error) {
-            console.error("Signup error:", error);
-            setMessage("Could not connect to server. Please try again.");
+            console.error('Signup error:', error);
+            setMessage('Could not connect to server. Please try again.');
         }
     };
 
     return (
-        <form className="user-signup" onSubmit={handleSubmit}>
-            <h2 className="signup-title">Sign Up</h2>
+        <form className='user-signup' onSubmit={handleSubmit}>
+            <h2 className='signup-title'>Sign Up</h2>
             <input
-                type="text"
-                placeholder="username"
+                type='text'
+                placeholder='username'
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
             />
             <input
-                type="text"
-                placeholder="password"
+                type='text'
+                placeholder='password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -65,7 +65,7 @@ const UserSignup: React.FC = () => {
                 onChange={(e) => setBio(e.target.value)}
                 required
             />
-            <button type="submit">Sign Up</button>
+            <button type='submit'>Sign Up</button>
             {message && <p>{message}</p>}
         </form>
     );

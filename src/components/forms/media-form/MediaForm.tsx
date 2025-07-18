@@ -40,38 +40,37 @@ const MediaForm: React.FC<MediaFormProps> = ({ onClose }) => {
                 setMessage('Media could not be posted.');
             }
         } catch (error) {
-            console.error("Posting error:", error);
-            setMessage("Could not connect to server. Please try again.");
+            console.error('Posting error:', error);
+            setMessage('Could not connect to server. Please try again.');
         }
     };
 
     return (
-        <form className="media-form" onSubmit={handleSubmit}>
-            <h2 className="media-title">Post a New Item</h2>
+        <form className='media-form' onSubmit={handleSubmit}>
+            <h2 className='section-title'>Post a New Item</h2>
             <input
-                type="text"
-                placeholder="Title"
+                type='text'
+                placeholder='Title'
                 value={media_name}
                 onChange={(e) => setMediaName(e.target.value)}
                 required
             />
-            <input
-                type="text"
+            <textarea
                 maxLength={500}
-                placeholder="Description"
+                placeholder='description'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
             />
-            <label htmlFor="medium">Medium:</label>
-            <select name="medium" id="medium" onChange={(e) => setMedium(e.target.value)} required>
-                <option value="Film">Movie</option>
-                <option value="Show">Show</option>
-                <option value="Book">Book</option>
-                <option value="Misc">Other</option>
+            <label htmlFor='medium'>Medium:</label>
+            <select name='medium' id='medium' onChange={(e) => setMedium(e.target.value)} required>
+                <option value='Film'>Movie</option>
+                <option value='Show'>Show</option>
+                <option value='Book'>Book</option>
+                <option value='Misc'>Other</option>
             </select>
-            <button type="submit">Post Media</button>
-            <button type="button" onClick={onClose}>Cancel</button>
+            <button type='submit'>Post Media</button>
+            <button type='button' onClick={onClose}>Cancel</button>
             {message && <p>{message}</p>}
         </form>
     );
