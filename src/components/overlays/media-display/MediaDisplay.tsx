@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './MediaDisplay.css'
 
-import ReviewForm from '../../review-form/ReviewForm'
+import ReviewForm from '../../forms/review-form/ReviewForm'
 
 type MediaDisplayProps = {
     onClose: () => void;

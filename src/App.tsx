@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 
-import Login from './pages/login/login';
-import Signup from './pages/signup/signup';
+import Login from './components/forms/login/login';
+import Signup from './components/forms/signup/signup';
 
 type User = {
   user_id: number;
@@ -32,7 +32,7 @@ function App() {
       <div className="auth-page">
         <div className="form-container">
           <Signup />
-          <p>
+          <p className='prompt'>
             Already have an account?{' '}
             <button onClick={() => setShowSignup(false)}>Log In</button>
           </p>

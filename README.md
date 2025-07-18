@@ -9,6 +9,11 @@
 * Joshua Austin Land - Scrum Master
 * Porter Hanley - Development Team Member
 
+## NEW - Before running, you have to install bootstrap <br>
+npm install bootstrap <br>
+npm install --save-dev typescript ts-loader <br>
+npm install --save-dev @types/bootstrap
+
 ## Instructions
 To run website: <br>
 npm install (if not installed already) <br>
