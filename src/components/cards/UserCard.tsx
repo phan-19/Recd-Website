@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Card.css'
 
 type CardProps = {
@@ -10,6 +11,9 @@ const UserCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     const [user_id, setUserID] = useState<number | null>(null);
     const [username, setUsername] = useState("");
     const [bio, setBio] = useState("");
+
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const loadCardData = async () => {
         var url = `http://localhost:3000/page/user/${id}`;
@@ -37,12 +41,9 @@ const UserCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     useEffect(() => { loadCardData(); }, []);
 
     const routeToUser = () => {
-        console.log('button');
-        const item = {
-            user_id: user_id,
-            type: 'user',
-        }
-        localStorage.setItem('item', JSON.stringify(item));
+        navigate(`/user/${user_id}`, {
+            state: { backgroundLocation: location },
+        });
     };
 
     return (
