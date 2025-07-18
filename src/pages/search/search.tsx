@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import SearchBar from '../../components/assets/search-bar/SearchBar';
-import MediaForm from '../../components/forms/media-form/MediaForm'
-import MediaCard from '../../components/cards/MediaCard';
-import UserCard from '../../components/cards/UserCard';
 import './Search.css';
+
+import SearchBar from '../../components/assets/search-bar/SearchBar';
+import MediaForm from '../../components/forms/media-form/MediaForm';
 import CardScroll from '../../components/cards/card-scroll/CardScroll';
+import Button from '../../components/assets/button/Button';
 
 type UserRes  = { 
   user_ids: number[]; 
@@ -64,11 +64,10 @@ export default function Search({ initialQuery = '' }: SearchProps) {
 
   return (
     <main className='container-fluid p-4'>
-
       {/* Search bar */}
       <div className='row justify-content-center'>
         <div className='col-lg-8 col-md-8 col-sm-12 mb-4'>
-          <div className='p-4 bg-primary h-100 search-bar-container'>
+          <div className='p-4 h-100 search-bar-container'>
             <SearchBar
             onSearch={setQuery}
             onEnter={setQuery}
@@ -79,8 +78,14 @@ export default function Search({ initialQuery = '' }: SearchProps) {
       </div>
 
       {/* Post Media Button */}
-      <div className='text-center mb-4'>
-        <button className='btn btn-success' type='button' onClick={() => setPostMedia(!postMedia)}>Add an Item</button>
+      <div className="row justify-content-center mb-4">
+        <div className="col-lg-8 col-md-8 col-sm-12 text-end">
+          <Button
+            buttonStyle='add-item'
+            buttonText='Add an Item'
+            onClick={() => setPostMedia(!postMedia)}
+          />
+        </div>
       </div>
 
       {/* Media Row */}

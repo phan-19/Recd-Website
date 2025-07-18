@@ -61,10 +61,10 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onClose, media }) => {
 
     return (
         <form className="review-form" onSubmit={handleSubmit}>
-            <h2 className="review-title">Post a Review for {media.media_name}</h2>
-            <input
-                type="text"
-                placeholder="review text"
+            <h2 className="section-title">Post a Review for<br></br><em>{media.media_name}</em></h2>
+            <textarea
+                maxLength={500}
+                placeholder='review'
                 value={review_txt}
                 onChange={(e) => setReview(e.target.value)}
                 required
