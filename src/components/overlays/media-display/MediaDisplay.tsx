@@ -11,14 +11,16 @@ type MediaDisplayProps = {
 type Media = {
     media_id: number;
     media_name: string;
-    medium: string;
-    reviews: [];
     description: string;
+    medium: string;
+    image: number[];
+    reviews: number[];
+    tags: string[];
 }
 
 const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
-    const [media, setMedia] = useState<Media | null>(null);
-    const [writingReview, setWritingReview] = useState(false);
+    const [ media, setMedia ] = useState<Media | null>(null);
+    const [ writingReview, setWritingReview ] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:3000/page/media/${media_id}`)

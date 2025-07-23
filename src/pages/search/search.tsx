@@ -7,13 +7,11 @@ import CardScroll from '../../components/cards/card-scroll/CardScroll';
 import Button from '../../components/assets/button/Button';
 
 type UserRes  = { 
-  user_ids: number[]; 
-  usernames: string[] 
+  result: number[]; 
 };
 
 type MediaRes = { 
-  media_ids: number[]; 
-  names: string[]
+  result: number[];
 };
 
 type SearchProps = { 
@@ -22,10 +20,10 @@ type SearchProps = {
 
 export default function Search({ initialQuery = '' }: SearchProps) {
   const [ query,  setQuery ] = useState(initialQuery);
-  const [ media,  setMedia ] = useState<{ id: number; name: string }[]>([]);
-  const [ users,  setUsers ] = useState<{ id: number; username: string }[]>([]);
+  const [ media,  setMedia ] = useState<number[]>([]);
+  const [ users,  setUsers ] = useState<number[]>([]);
   const [ err, setErr ] = useState('');
-
+  const [ loading, setLoading ] = useState(false);
   const [ postMedia, setPostMedia ] = useState(false);
 
   useEffect(() => setQuery(initialQuery), [initialQuery]);
@@ -34,9 +32,11 @@ export default function Search({ initialQuery = '' }: SearchProps) {
     if (!query.trim()) {
       setMedia([]);
       setUsers([]);
+      setErr('');
       return;
     }
 
+    setLoading(true);
     async function searchMedia(term: string): Promise<MediaRes> {
       const response = await fetch(`http://localhost:3000/search/media/${encodeURIComponent(term)}`);
       if (!response.ok) throw new Error('Media fetch failed');
@@ -52,11 +52,12 @@ export default function Search({ initialQuery = '' }: SearchProps) {
     const timer = setTimeout(() => {
       Promise.all([searchMedia(query), searchUsers(query)])
         .then(([m, u]) => {
-          setMedia(m.media_ids.map((id, i) => ({ id, name: m.names[i] })));
-          setUsers(u.user_ids.map((id, i) => ({ id, username: u.usernames[i] })));
+          setMedia(m.result);
+          setUsers(u.result);
           setErr('');
         })
         .catch(() => setErr('Server error — please try again.'))
+        .finally(() => setLoading(false));
     }, 300);
 
     return () => clearTimeout(timer);
@@ -83,10 +84,12 @@ export default function Search({ initialQuery = '' }: SearchProps) {
           <Button
             buttonStyle='add-item'
             buttonText='Add an Item'
-            onClick={() => setPostMedia(!postMedia)}
+            onClick={() => setPostMedia(true)}
           />
         </div>
       </div>
+
+      {loading && <p>Loading...</p>}
 
       {/* Media Row */}
       {!!media.length && (
@@ -94,7 +97,7 @@ export default function Search({ initialQuery = '' }: SearchProps) {
           <h3 className='mb-3 section-title'>Media Containing "{query}"</h3>
           <div>
             <CardScroll 
-              ids={media.map(m => m.id)} card_type='media'
+              ids={media} card_type='media'
             />
           </div>
         </section>
@@ -106,7 +109,7 @@ export default function Search({ initialQuery = '' }: SearchProps) {
           <h3 className='mb-3 section-title'>Users Containing "{query}"</h3>
           <div>
             <CardScroll 
-              ids={media.map(m => m.id)} card_type='user'
+              ids={users} card_type='user'
             />
           </div>
         </section>
@@ -114,14 +117,12 @@ export default function Search({ initialQuery = '' }: SearchProps) {
 
       {postMedia && (
         <div>
-            {postMedia && (
-                <div className='overlay'>
-                    <div className='overlay-component'>
-                        <MediaForm onClose={() => setPostMedia(!postMedia)} />
-                    </div>
+            <div className='overlay'>
+                <div className='overlay-component'>
+                    <MediaForm onClose={() => setPostMedia(false)} />
                 </div>
-            )}
-          </div>
+            </div>
+        </div>
       )}
     </main>
   );

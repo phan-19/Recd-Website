@@ -57,31 +57,6 @@ h1 {
   }
 }
 
-/* Card Scroll Features - To be used on multiple pages */
-.card-scroll {
-  display: flex;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  margin: 0.5rem;
-}
-
-.cards::-webkit-scrollbar {
-  height: 12px;
-}
-
-.cards::-webkit-scrollbar-thumb,
-.cards::-webkit-scrollbar-track {
-  border-radius: 92px;
-}
-
-.cards::-webkit-scrollbar-thumb {
-  background: var(--darkred);
-}
-
-.cards::-webkit-scrollbar-track {
-  background: var(--thumb);
-}
-
 .modal-overlay {
     position: fixed;
     top: 0;

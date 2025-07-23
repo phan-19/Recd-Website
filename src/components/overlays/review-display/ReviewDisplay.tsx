@@ -10,9 +10,9 @@ type Review = {
     review_text: string,
 }
 
-const UserProfile: React.FC = () => {
-    const [review, setReview] = useState<Review | null>(null);
-    const [loading, setLoading] = useState(true);
+const ReviewDisplay: React.FC = () => {
+    const [ review, setReview ] = useState<Review | null>(null);
+    const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
         const stored = localStorage.getItem('item');
@@ -60,4 +60,4 @@ const UserProfile: React.FC = () => {
     );
 }
 
-export default UserProfile;
+export default ReviewDisplay;

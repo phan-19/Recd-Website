@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './login.css';
 
 type LoginProps = {
-    onLogin: (user: { user_id: number, username: string }) => void;
+    onLogin: (user: { user_id: number }) => void;
 }
 
 const UserLogin: React.FC<LoginProps> = ({ onLogin }) => {
@@ -26,21 +26,20 @@ const UserLogin: React.FC<LoginProps> = ({ onLogin }) => {
 
             const result = await response.json();
 
-            if (result.success) {
+            if (result) {
                 const user = {
-                    user_id: result.user_id,
-                    username: result.username
+                    user_id: result.user_id
                 };
                 setMessage(`Login successful`);
-                localStorage.setItem("user", JSON.stringify(user))
+                localStorage.setItem('user', JSON.stringify(user))
                 console.log('User logged in:', {username, password});
                 onLogin(user);
             } else {
-                setMessage("Invalid username or password.");
+                setMessage('Invalid username or password.');
             }
         } catch (error) {
-            console.error("Login error:", error);
-            setMessage("Could not connect to server. Please try again.");
+            console.error('Login error:', error);
+            setMessage('Could not connect to server. Please try again.');
         }
     };
 
@@ -49,23 +48,23 @@ const UserLogin: React.FC<LoginProps> = ({ onLogin }) => {
             <div className='row'>
                 <h1 className='title'>RECD</h1>
             <div>
-                <form className="user-login" onSubmit={handleSubmit}>
-                    <h2 className="login-title">Log In</h2>
+                <form className='user-login' onSubmit={handleSubmit}>
+                    <h2 className='login-title'>Log In</h2>
                     <input
-                        type="text"
-                        placeholder="username"
+                        type='text'
+                        placeholder='username'
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                     <input
-                        type="password"
-                        placeholder="password"
+                        type='password'
+                        placeholder='password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <button type="submit">Log In</button>
+                    <button type='submit'>Log In</button>
                     {message && <p>{message}</p>}
                 </form>
             </div>

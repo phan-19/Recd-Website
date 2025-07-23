@@ -1,22 +1,4 @@
-.card {
-    border: 1px solid #000;
-    min-width: 200px;
-    max-width: 300px;
-    min-height: 250px;
-    max-height: 350px;
-    overflow: scroll;
-    background-color: rgb(66, 76, 71);
-    box-shadow: 0 2px 5px black;
-}
 
-.card-image {
-    width: 100%;
-    height: auto;
-}
-
-.card-content {
-    padding: 1rem;
-}
 
 .card-title {
     margin: 0;
@@ -40,8 +22,32 @@
     overflow: scroll;
 }
 
-/* Card Resizing for different screen sizes */
+/* Card Scroll Features - To be used on multiple pages */
+.card-scroll {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  margin: 0.5rem;
+}
 
+.cards::-webkit-scrollbar {
+  height: 12px;
+}
+
+.cards::-webkit-scrollbar-thumb,
+.cards::-webkit-scrollbar-track {
+  border-radius: 92px;
+}
+
+.cards::-webkit-scrollbar-thumb {
+  background: var(--darkred);
+}
+
+.cards::-webkit-scrollbar-track {
+  background: var(--thumb);
+}
+
+/* Card Resizing for different screen sizes */
 .card:not(:last-child) {
     margin-right: 4px;
 }

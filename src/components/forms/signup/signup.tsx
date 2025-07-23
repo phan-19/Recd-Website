@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import './signup.css';
 
 const UserSignup: React.FC = () => {
-    const [username, setUsername] = useState(''); //p
-    const [password, setPassword] = useState(''); //vrysecurepassword:D
-    const [bio, setBio] = useState('');
-    const [message, setMessage] = useState('');
+    const [ username, setUsername ] = useState(''); //p
+    const [ password, setPassword ] = useState(''); //vrysecurepassword:D
+    const [ bio, setBio ] = useState('');
+    const [ profile_pic, setProfilePic ] = useState<Array<number> | null>(null);
+    const [ message, setMessage ] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -18,7 +19,12 @@ const UserSignup: React.FC = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username, password, bio })
+                body: JSON.stringify({ 
+                    username, 
+                    password, 
+                    bio, 
+                    profile_pic: profile_pic ?? [], 
+                })
             };
 
             var response = await fetch(url, options);
@@ -29,7 +35,7 @@ const UserSignup: React.FC = () => {
 
             const result = await response.json();
 
-            if (result.status === 'success') {
+            if (result) {
                 setMessage('Signup was successful. Please log in.');
             } else {
                 setMessage('Invalid username or password.');
@@ -39,6 +45,19 @@ const UserSignup: React.FC = () => {
             setMessage('Could not connect to server. Please try again.');
         }
     };
+
+    const convertImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const arrayBuffer = reader.result as ArrayBuffer;
+                const byteArray = new Uint8Array(arrayBuffer);
+                setProfilePic(Array.from(byteArray));
+            };
+            reader.readAsArrayBuffer(file);
+        }
+    }
 
     return (
         <form className='user-signup' onSubmit={handleSubmit}>
@@ -63,7 +82,13 @@ const UserSignup: React.FC = () => {
                 placeholder='bio'
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                required
+            />
+            <label htmlFor='image'>Profile Photo:</label>
+            <input
+                type='file'
+                id='image'
+                accept='image/*'
+                onChange={convertImage}
             />
             <button type='submit'>Sign Up</button>
             {message && <p>{message}</p>}

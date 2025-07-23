@@ -3,14 +3,29 @@
     min-width: 200px;
     max-width: 300px;
     min-height: 250px;
-    max-height: 350px;
     overflow: hidden;
     background-color: rgb(66, 76, 71);
     box-shadow: 0 2px 5px black;
 }
 
+.card .user {
+    height: 200px;
+}
+
 .card-content {
-    padding: 0.5rem;
+    padding: 1rem;
+}
+
+.card-type {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: rgb(166, 166, 166);
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .card-media-name {
@@ -58,9 +73,16 @@
 .card-description {
     font-size: 0.9rem;
     color: #d0d0d0;
-    max-height: 6rem;
-    min-height: 8rem;
-    overflow-y: scroll;
+    max-height: 8rem;
+    overflow-y: auto;
+}
+
+.card-description::-webkit-scrollbar {
+    width: 4px;
+}
+.card-description::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
 }
 
 /* Card Resizing for different screen sizes */
