@@ -1,4 +1,4 @@
-.profile-content {
+.user .profile-content {
     border: 1px solid #000;
     min-width: 300px;
     min-height: 200px;
@@ -10,13 +10,29 @@
     
 }
 
-.username {
-    margin: 0.25rem 0;
-    font-size: 0.9rem;
-    color: grey;
+.user .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
-.bio {
+.user .profile-pic {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.user .username {
+    font-size: 0.9rem;
+    color: #d0d0d0;
+    width: fit-content;
+}
+
+.user .bio {
     font-size: 0.8rem;
     color: #d0d0d0;
     max-height: 100px;

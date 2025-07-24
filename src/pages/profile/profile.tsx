@@ -59,14 +59,17 @@ const UserProfile: React.FC = () => {
     return (
         <div className="profile user">
             <div className='profile-content'>
-                {profile.profile_pic.length > 0 && (
-                    <img
-                        src={getProfilePicSrc(profile.profile_pic)}
-                        alt={`${profile.username}'s profile`}
-                        className="profile-pic"
-                    />
-                )}
-                <h2 className='username '>{'@'}{profile.username}</h2>
+                <div className='profile-header'>
+                    {profile.profile_pic.length > 0 && (
+                        <img
+                            src={getProfilePicSrc(profile.profile_pic)}
+                            alt={`${profile.username}'s profile`}
+                            className="profile-pic"
+                        />
+                    )}
+                    <h2 className='username'>{'@'}{profile.username}</h2>
+                </div>
+
                 <p className='bio '>{profile.bio}</p>
                 <button onClick={handleLogout}>Log Out</button>
             </div>
