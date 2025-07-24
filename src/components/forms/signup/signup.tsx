@@ -2,49 +2,11 @@ import React, { useState } from 'react';
 import './signup.css';
 
 const UserSignup: React.FC = () => {
-    const [ username, setUsername ] = useState(''); //p
-    const [ password, setPassword ] = useState(''); //vrysecurepassword:D
+    const [ username, setUsername ] = useState('');
+    const [ password, setPassword ] = useState('');
     const [ bio, setBio ] = useState('');
-    const [ profile_pic, setProfilePic ] = useState<Array<number> | null>(null);
+    const [ profilePic, setProfilePic ] = useState<Array<number> | null>(null);
     const [ message, setMessage ] = useState('');
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        var url = `http://localhost:3000/user`;
-
-        try {
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 
-                    username, 
-                    password, 
-                    bio, 
-                    profile_pic: profile_pic ?? [], 
-                })
-            };
-
-            var response = await fetch(url, options);
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            const result = await response.json();
-
-            if (result) {
-                setMessage('Signup was successful. Please log in.');
-            } else {
-                setMessage('Invalid username or password.');
-            }
-        } catch (error) {
-            console.error('Signup error:', error);
-            setMessage('Could not connect to server. Please try again.');
-        }
-    };
 
     const convertImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -58,6 +20,44 @@ const UserSignup: React.FC = () => {
             reader.readAsArrayBuffer(file);
         }
     }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const url = 'http://localhost:3000/user';
+
+        try {
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username,
+                    password,
+                    bio,
+                    profile_pic: profilePic ?? [],
+                }),
+            };
+
+            const response = await fetch(url, options);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const result = await response.json();
+
+            if (result.result) {
+                setMessage('Signup was successful. Please log in.');
+            } else {
+                setMessage('Signup failed: ' + result.err);
+            }
+        } catch (error) {
+            console.error('Signup error:', error);
+            setMessage('Could not connect to server. Please try again.');
+        }
+    };
 
     return (
         <form className='user-signup' onSubmit={handleSubmit}>
@@ -76,7 +76,7 @@ const UserSignup: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
             />
-            <textarea 
+            <textarea
                 className='bio'
                 maxLength={250}
                 placeholder='bio'
@@ -101,6 +101,5 @@ export default function Signup() {
         <main>
             <UserSignup />
         </main>
-        
     );
 }

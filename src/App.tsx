@@ -8,7 +8,6 @@ import Signup from './components/forms/signup/signup';
 
 type User = {
   user_id: number;
-  username: string;
 };
 
 function App() {

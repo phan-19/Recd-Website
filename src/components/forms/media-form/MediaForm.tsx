@@ -37,7 +37,12 @@ const MediaForm: React.FC<MediaFormProps> = ({ onClose }) => {
                 headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ media_name, description, medium, image })
+                body: JSON.stringify({ 
+                    media_name, 
+                    description, 
+                    medium, 
+                    image: image ?? [] 
+                })
             };
 
             console.log({ media_name, description, medium, image });
