@@ -2,26 +2,45 @@ import React, { useState } from 'react';
 import './signup.css';
 
 const UserSignup: React.FC = () => {
-    const [username, setUsername] = useState(''); //p
-    const [password, setPassword] = useState(''); //vrysecurepassword:D
-    const [bio, setBio] = useState('');
-    const [message, setMessage] = useState('');
+    const [ username, setUsername ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ bio, setBio ] = useState('');
+    const [ profilePic, setProfilePic ] = useState<Array<number> | null>(null);
+    const [ message, setMessage ] = useState('');
+
+    const convertImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const arrayBuffer = reader.result as ArrayBuffer;
+                const byteArray = new Uint8Array(arrayBuffer);
+                setProfilePic(Array.from(byteArray));
+            };
+            reader.readAsArrayBuffer(file);
+        }
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        var url = `http://localhost:3000/user`;
+        const url = 'http://localhost:3000/user';
 
         try {
             const options = {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password, bio })
+                body: JSON.stringify({
+                    username,
+                    password,
+                    bio,
+                    profile_pic: profilePic ?? [],
+                }),
             };
 
-            var response = await fetch(url, options);
+            const response = await fetch(url, options);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -29,10 +48,10 @@ const UserSignup: React.FC = () => {
 
             const result = await response.json();
 
-            if (result.status === 'success') {
+            if (result.result) {
                 setMessage('Signup was successful. Please log in.');
             } else {
-                setMessage('Invalid username or password.');
+                setMessage('Signup failed: ' + result.err);
             }
         } catch (error) {
             console.error('Signup error:', error);
@@ -57,13 +76,19 @@ const UserSignup: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
             />
-            <textarea 
+            <textarea
                 className='bio'
                 maxLength={250}
                 placeholder='bio'
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                required
+            />
+            <label htmlFor='image'>Profile Photo:</label>
+            <input
+                type='file'
+                id='image'
+                accept='image/*'
+                onChange={convertImage}
             />
             <button type='submit'>Sign Up</button>
             {message && <p>{message}</p>}
@@ -76,6 +101,5 @@ export default function Signup() {
         <main>
             <UserSignup />
         </main>
-        
     );
 }

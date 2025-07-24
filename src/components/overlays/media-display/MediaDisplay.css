@@ -4,10 +4,11 @@
     left: 0;
     width: 100%;
     height: 100%;
+    overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     z-index: 1000; 
 }
 
@@ -29,17 +30,24 @@
     box-shadow: 0 2px 5px black;
 }
 
+.media-image {
+    max-width: 200px;
+    height: auto;
+}
+
 .title {
     margin: 0.25rem 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #d0d0d0;
 }
 
 .medium {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
     color: #a5a5a5;
     max-height: 100px;
-    overflow: scroll;
+    font-weight: normal;
 }
 
 .description {

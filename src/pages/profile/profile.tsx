@@ -3,20 +3,21 @@ import './profile.css'
 
 type User = {
     user_id: number,
-    username: string
+    username: string,
 };
 
 type Profile = {
     user_id: number,
     username: string,
-    bio: string
+    bio: string,
+    profile_pic: number[],
+    reviews: number[],
 }
 
 const UserProfile: React.FC = () => {
-    const [user, setUser] = useState<User | null>(null);
-    const [profile, setProfile] = useState<Profile | null>(null);
-    const [loading, setLoading] = useState(true);
-
+    const [ user, setUser ] = useState<User | null>(null);
+    const [ profile, setProfile ] = useState<Profile | null>(null);
+    
     useEffect(() => {
         const stored = localStorage.getItem('user');
         if (stored) {
@@ -31,11 +32,14 @@ const UserProfile: React.FC = () => {
                 .catch(err => {
                     console.error('Failed to fetch profile:', err);
                 });
-            setLoading(false);
-        } else {
-            setLoading(false);
-        }
+        } 
     }, []);
+
+    const getProfilePicSrc = (bytes: number[]) => {
+        const uint8Array = new Uint8Array(bytes);
+        const base64String = btoa(String.fromCharCode(...uint8Array));
+        return `data:image/png;base64,${base64String}`; // or image/jpeg, depending on your data
+    };
 
     const handleLogout = () => {
         localStorage.removeItem('user');
@@ -43,10 +47,6 @@ const UserProfile: React.FC = () => {
         setProfile(null);
         window.location.reload();
     };
-
-    if (loading) {
-        return <p>Loading...</p>;
-    }
 
     if (!user) {
         return <p>No user found on local device.</p>;
@@ -59,7 +59,17 @@ const UserProfile: React.FC = () => {
     return (
         <div className="profile user">
             <div className='profile-content'>
-                <h2 className='username '>{'@'}{profile.username}</h2>
+                <div className='profile-header'>
+                    {profile.profile_pic.length > 0 && (
+                        <img
+                            src={getProfilePicSrc(profile.profile_pic)}
+                            alt={`${profile.username}'s profile`}
+                            className="profile-pic"
+                        />
+                    )}
+                    <h2 className='username'>{'@'}{profile.username}</h2>
+                </div>
+
                 <p className='bio '>{profile.bio}</p>
                 <button onClick={handleLogout}>Log Out</button>
             </div>

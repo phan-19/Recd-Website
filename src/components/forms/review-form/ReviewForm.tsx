@@ -5,8 +5,8 @@ type ReviewFormProps = {
     onClose: () => void;
     media: {
         media_id: number,
-        media_name: string
-    };
+        media_name: string,
+    }
 };
 
 const ReviewForm: React.FC<ReviewFormProps> = ({ onClose, media }) => {
@@ -28,7 +28,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onClose, media }) => {
         const user = JSON.parse(userStored);
 
         const user_id = user.user_id;
-        const media_name = media.media_name;
+        const media_id = media.media_id;
 
         try {
             const options = {
@@ -36,10 +36,10 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onClose, media }) => {
                 headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ user_id, media_name, rating, review_txt })
+            body: JSON.stringify({ user_id, media_id, rating, review_txt })
             };
 
-            console.log({ user_id, media_name, rating, review_txt });
+            console.log({ user_id, media_id, rating, review_txt });
             var response = await fetch(url, options);
 
             if (!response.ok) {
@@ -48,7 +48,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onClose, media }) => {
 
             const result = await response.json();
 
-            if (result.status === 'success') {
+            if (result) {
                 setMessage('Review posted.');
             } else {
                 setMessage('Review could not be posted.');

@@ -4,6 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: center;
@@ -12,13 +13,15 @@
 }
 
 .overlay-content {
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.profile-content {
+.overlay .profile-content {
     border: 1px solid #000;
+    width: 60%;
     min-width: 300px;
     min-height: 200px;
     border-radius: 2.5px;
@@ -26,6 +29,22 @@
     padding: 1rem;
     background-color: rgb(66, 76, 71);
     box-shadow: 0 2px 5px black;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.profile-pic {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .username {

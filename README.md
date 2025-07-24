@@ -26,6 +26,3 @@ Server repo
 To run server: <br>
 move updated database file into the file tree (optional) <br>
 cargo run
-
-## Info
-I (Jules) am in the process of refactoring the website code! If working in a separate branch, pull from main often or stay out of existing files please.

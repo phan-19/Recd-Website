@@ -11,14 +11,16 @@ type MediaDisplayProps = {
 type Media = {
     media_id: number;
     media_name: string;
-    medium: string;
-    reviews: [];
     description: string;
+    medium: string;
+    image: Array<number> | [];
+    reviews: number[];
+    tags: string[];
 }
 
 const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
-    const [media, setMedia] = useState<Media | null>(null);
-    const [writingReview, setWritingReview] = useState(false);
+    const [ media, setMedia ] = useState<Media | null>(null);
+    const [ writingReview, setWritingReview ] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:3000/page/media/${media_id}`)
@@ -46,6 +48,13 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
         );
     }
 
+    const displayImage = (image: number[]) => {
+        const uint8Array = new Uint8Array(image);
+        const blob = new Blob([uint8Array], { type: 'image/jpeg' }); // or 'image/png'
+        const imageUrl = URL.createObjectURL(blob);
+        return imageUrl;
+    };
+
     const toggleWriteReview = () => {
         setWritingReview(!writingReview);
     };
@@ -53,8 +62,15 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
     return (
         <div className="media-page overlay">
             <div className='media-content overlay-component'>
+                {media.image.length > 0 && (
+                    <img
+                        src={displayImage(media.image)}
+                        alt={media.media_name}
+                        className={'media-image'}
+                    />
+                )}
                 <h2 className='title'>{media.media_name}</h2>
-                <h4 className='medium'>{media.medium}</h4>
+                <h4 className='medium'><em>{media.medium}</em></h4>
                 <p className='description'>{media.description}</p>
                 <button type="button" onClick={toggleWriteReview}>Post a Review</button>
                 <button type='button' onClick={onClose}>Go Back</button>
