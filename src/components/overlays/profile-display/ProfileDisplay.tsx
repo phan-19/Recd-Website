@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './ProfileDisplay.css';
 
+import CardScroll from '../../cards/card-scroll/CardScroll';
+
 type ProfileDisplayProps = {
     onClose: () => void,
     user_id: number,
@@ -57,6 +59,10 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ onClose, user_id }) => 
                 </div>
                 <p className='bio'>{profile.bio}</p>
                 <button onClick={onClose}>Go Back</button>
+                <div>
+                    <h2 className='section-tite'>Reviews by {profile.username}</h2>
+                    <CardScroll ids={profile.reviews} card_type='review'></CardScroll>
+                </div>
             </div>
         </div>
     );

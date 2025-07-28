@@ -17,6 +17,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
 }
 
 .media-content {
@@ -26,7 +27,7 @@
     border-radius: 2.5px;
     margin: 0.5rem;
     padding: 1rem;
-    background-color: rgb(66, 76, 71);
+    background-color: #242424;
     box-shadow: 0 2px 5px black;
 }
 
