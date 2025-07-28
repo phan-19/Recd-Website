@@ -6,6 +6,8 @@
     overflow: hidden;
     background-color: rgb(66, 76, 71);
     box-shadow: 0 2px 5px black;
+    display: flex;
+    flex-direction: column;
 }
 
 .card .user {
@@ -14,6 +16,7 @@
 
 .card-content {
     padding: 1rem;
+    height: 100%;
 }
 
 .card-type {
@@ -48,7 +51,7 @@
     text-align: left;
     margin: 0.1rem 0;
     font-size: 0.9rem;
-    color: grey;
+    color: rgb(166, 166, 166);
 }
 
 .card-username-button {
@@ -67,14 +70,20 @@
 
 .card-rating {
     margin: 0.1rem 0;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .card-description {
     font-size: 0.9rem;
     color: #d0d0d0;
-    max-height: 8rem;
+    height: 8rem;
     overflow-y: auto;
+}
+
+.card-posted-at {
+    font-size: 0.75rem;
+    color: rgb(166, 166, 166);
+    margin-bottom: 0;
 }
 
 .card-description::-webkit-scrollbar {
@@ -114,9 +123,5 @@
 @media (min-width: 1100px) {
     .card {
         flex-basis: calc(25% - 30px);
-    }
-
-    .card:not(:last-child) {
-        margin-right: 12px;
     }
 }

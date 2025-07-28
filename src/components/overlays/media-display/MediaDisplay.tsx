@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './MediaDisplay.css'
 
 import ReviewForm from '../../forms/review-form/ReviewForm'
+import CardScroll from '../../cards/card-scroll/CardScroll';
 
 type MediaDisplayProps = {
     onClose: () => void;
@@ -74,6 +75,9 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
                 <p className='description'>{media.description}</p>
                 <button type="button" onClick={toggleWriteReview}>Post a Review</button>
                 <button type='button' onClick={onClose}>Go Back</button>
+                <div>
+                    <CardScroll ids={media.reviews} card_type='review' />
+                </div>
             </div>
             {writingReview && (
                 <div className='overlay'>
@@ -82,9 +86,6 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
                     </div>
                 </div>
             )}
-            <div>
-                {/* Review scroll here - Feeling lazy rn */}
-            </div>
         </div>
     );
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './profile.css'
 
+import CardScroll from '../../components/cards/card-scroll/CardScroll';
+
 type User = {
     user_id: number,
     username: string,
@@ -72,6 +74,10 @@ const UserProfile: React.FC = () => {
 
                 <p className='bio '>{profile.bio}</p>
                 <button onClick={handleLogout}>Log Out</button>
+            </div>
+            <div>
+                <h2 className='section-title'>Your Reviews</h2>
+                <CardScroll ids={profile.reviews} card_type='review' />
             </div>
         </div>
     );

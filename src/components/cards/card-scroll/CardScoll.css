@@ -1,27 +1,3 @@
-
-
-.card-title {
-    margin: 0;
-}
-
-.card-type {
-    margin: 0.25rem 0;
-    font-size: 0.9rem;
-    color: grey;
-}
-
-.card-rating {
-    margin: 0.25rem 0;
-    font-size: 0.9rem;
-}
-
-.card-description {
-    font-size: 1rem;
-    color: #d0d0d0;
-    max-height: 100px;
-    overflow: scroll;
-}
-
 /* Card Scroll Features - To be used on multiple pages */
 .card-scroll {
   display: flex;
