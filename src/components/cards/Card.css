@@ -1,7 +1,7 @@
 .card {
     border: 1px solid #000;
     min-width: 200px;
-    max-width: 300px;
+    max-width: 200px;
     min-height: 250px;
     overflow: hidden;
     background-color: rgb(66, 76, 71);
@@ -10,8 +10,8 @@
     flex-direction: column;
 }
 
-.card .user {
-    height: 200px;
+.card.review {
+    height: 300px;
 }
 
 .card-content {
@@ -26,8 +26,8 @@
 }
 
 .card-image {
-    width: 100%;
-    height: auto;
+    width: 200px;
+    height: 300px;
     object-fit: cover;
 }
 
@@ -61,7 +61,11 @@
     text-align: left;
     margin: 0.1rem 0;
     font-size: 0.9rem;
-    color: grey;
+    color: rgb(166, 166, 166);
+}
+
+.user .card-username-button {
+    font-size: 1rem;
 }
 
 .card-username-button:hover {
@@ -76,14 +80,19 @@
 .card-description {
     font-size: 0.9rem;
     color: #d0d0d0;
-    height: 8rem;
+    max-height: 7rem;
     overflow-y: auto;
+    margin-bottom: 0;
 }
 
-.card-posted-at {
+.card-content.footer {
     font-size: 0.75rem;
     color: rgb(166, 166, 166);
-    margin-bottom: 0;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: fit-content;
+    align-items: flex-end;
 }
 
 .card-description::-webkit-scrollbar {

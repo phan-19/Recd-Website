@@ -31,6 +31,7 @@ const UserCard: React.FC<CardProps> = ({ cardStyle, id }) => {
             setUserID(result.user_id);
             setUsername(result.username);
             setBio(result.bio);
+            setProfilePic(result.profile_pic)
         } catch (error) {
             console.error('Retrieve review error:', error);
             setUserID(-1);
@@ -57,14 +58,16 @@ const UserCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     return (
         <div className={cardStyle}>
             <div className='card-content'>
-                {profile_pic.length > 0 && (
-                    <img
-                        src={displayImage(profile_pic)}
-                        alt={username}
-                        className={'profile-pic'}
-                    />
-                )}
-                <button className='card-media-name' onClick={routeToUser}>{username}</button>
+                <div className='profile-header'>
+                    {profile_pic.length > 0 && (
+                        <img
+                            src={displayImage(profile_pic)}
+                            alt={username}
+                            className="profile-pic"
+                        />
+                    )}
+                    <button onClick={routeToUser} className='card-username-button'>{'@'}{username}</button>
+                </div>
                 <p className='card-description'>{bio}</p>
             </div>
         </div>
