@@ -16,7 +16,7 @@ const CardScroll: React.FC<CardScrollProps> = ({ ids, card_type }) => {
         }
         switch (card_type) {
             case "review":
-                return ids.map((id, index) => (<ReviewCard key={index} cardStyle='card' id={id} />));
+                return ids.map((id, index) => (<ReviewCard key={index} cardStyle='review card' id={id} />));
             case "media":
                 return ids.map((id, index) => (<MediaCard key={index} cardStyle='card' id={id} />));
             case "user":

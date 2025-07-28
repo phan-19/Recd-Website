@@ -79,6 +79,8 @@ const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
                     <StarRating rating={rating || 0} /> <span style={{marginLeft: '0.5rem'}}></span>
                 </div>
                 <p className='card-description'>{review_txt}</p>
+            </div>
+            <div className='card-content footer'>
                 <p className='card-posted-at'>{posted_at}</p>
             </div>
         </div>

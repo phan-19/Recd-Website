@@ -24,7 +24,7 @@ export default function Movies() {
         if (!user_id || user_id === null) return;
 
         const loadMovies = async () => {
-            const url = `http://localhost:3000/page/medium/movie`;
+            const url = `http://localhost:3000/page/medium/${user_id}/movie`;
             try {
                 const response = await fetch(url);
                 if (!response.ok) {
@@ -48,7 +48,7 @@ export default function Movies() {
             <div className='row'>
                 <div className='col-lg-6 col-md-12 mb-4'>
                     <div className='p-4 bg-primary text-white rounded h-100'>
-                        <h2 className='section-title'>Recommended</h2>
+                        <h2 className='section-title'>Recommended Movies</h2>
                         <CardScroll ids={recommended} card_type='media' />
                     </div>
                 </div>
@@ -56,7 +56,7 @@ export default function Movies() {
             <div className='row'>
                 <div className='col-lg-6 col-md-12 mb-4'>
                     <div className='p-4 bg-primary text-white rounded h-100'>
-                        <h2 className='section-title'>Recent Media</h2>
+                        <h2 className='section-title'>Recent Movies</h2>
                         <CardScroll ids={recent_media} card_type='media' />
                     </div>
                 </div>
