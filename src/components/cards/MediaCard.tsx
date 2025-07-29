@@ -43,7 +43,7 @@ const MediaCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     };
 
     const handleMediaClick = () => {
-        navigate(`/media/${id}`, {
+        navigate(`/media/${media_id}/preview`, {
             state: { backgroundLocation: location },
         });
     };

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './profile.css'
+import { useParams } from 'react-router-dom';
+import './user.css'
 
-import Button from '../../components/assets/button/Button'
-import CardScroll from '../../components/cards/card-scroll/CardScroll';
+import Button from '../../../components/assets/button/Button'
+import CardScroll from '../../../components/cards/card-scroll/CardScroll';
 
 type User = {
     user_id: number,
@@ -17,22 +18,17 @@ type Profile = {
     reviews: number[],
 }
 
-const UserProfile: React.FC = () => {
-    const [user, setUser] = useState<User | null>(null);
-    const [profile, setProfile] = useState<Profile | null>(null);
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [editProfile, setEditProfile] = useState(false);
-    const [followedUsers, setFollowedUsers] = useState<number[]>([]);
-    const [followedMedia, setFollowedMedia] = useState<number[]>([]);
+const User: React.FC = () => {
+    const [ user, setUser ] = useState<User | null>(null);
+    const [ profile, setProfile ] = useState<Profile | null>(null);
+    const [ menuOpen, setMenuOpen ] = useState(false);
 
-
+    
+    const { user_id } = useParams();
+    
     useEffect(() => {
-        const stored = localStorage.getItem('user');
-        if (stored) {
-            const storedUser: User = JSON.parse(stored);
-            setUser(storedUser);
-
-            fetch(`http://localhost:3000/page/user/${storedUser.user_id}`)
+        if (user_id) {
+            fetch(`http://localhost:3000/page/user/${user_id}`)
                 .then(response => response.json())
                 .then(data => {
                     setProfile(data);
@@ -40,16 +36,7 @@ const UserProfile: React.FC = () => {
                 .catch(err => {
                     console.error('Failed to fetch profile:', err);
                 });
-
-            fetch(`http://localhost:3000/follow/list/${storedUser.user_id}/user`)
-                .then(response => response.json())
-                .then(result => { setFollowedUsers(result.following) })
-                .catch(err => { console.error("Failed to fetch followed users:", err) });
-            fetch(`http://localhost:3000/follow/list/${storedUser.user_id}/media`)
-                .then(response => response.json())
-                .then(result => { setFollowedMedia(result.following) })
-                .catch(err => { console.error("Failed to fetch followed users:", err) });
-        }
+        } 
     }, []);
 
     const getProfilePicSrc = (bytes: number[]) => {
@@ -57,17 +44,6 @@ const UserProfile: React.FC = () => {
         const base64String = btoa(String.fromCharCode(...uint8Array));
         return `data:image/png;base64,${base64String}`; // or image/jpeg, depending on your data
     };
-
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        setUser(null);
-        setProfile(null);
-        window.location.reload();
-    };
-
-    if (!user) {
-        return <p>No user found on local device.</p>;
-    }
 
     if (!profile) {
         return <p>Loading profile...</p>;
@@ -91,7 +67,7 @@ const UserProfile: React.FC = () => {
                     {menuOpen && (
                         <>
                             <div className={`profile-dropdown-menu ${menuOpen ? 'menu-open' : ''}`}>
-                                <Button
+                                {/* <Button
                                     buttonStyle='small-button'
                                     buttonText='Edit Profile'
                                     onClick={() => {
@@ -104,7 +80,7 @@ const UserProfile: React.FC = () => {
                                     onClick={() => {
                                         handleLogout();
                                     }}
-                                />
+                                /> */}
                             </div>
                         </>
                     )}
@@ -112,19 +88,11 @@ const UserProfile: React.FC = () => {
                 <p className='bio '>{profile.bio}</p>
             </div>
             <div>
-                <h2 className='section-title'>Your Reviews</h2>
+                <h2 className='section-title'>{profile.username}'s Reviews</h2>
                 <CardScroll ids={profile.reviews} card_type='review' />
             </div>
-            <div>
-                <h2 className='section-title'>Followed Users</h2>
-                <CardScroll ids={followedUsers} card_type='user' />
-            </div>
-            <div>
-                <h2 className='section-title'>Followed Media</h2>
-                <CardScroll ids={followedMedia} card_type='media' />
-            </div>
-        </div >
+        </div>
     );
 }
 
-export default UserProfile;
+export default User;

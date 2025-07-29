@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ProfileDisplay.css';
 
 import CardScroll from '../../cards/card-scroll/CardScroll';
@@ -20,6 +21,8 @@ type Profile = {
 const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ onClose, user_id }) => {
     const [profile, setProfile] = useState<Profile | null>(null);
     const [stored_user, setStoredUser] = useState<number | null>(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`http://localhost:3000/page/user/${user_id}`)
@@ -50,6 +53,10 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ onClose, user_id }) => 
         return `data:image/png;base64,${base64String}`; // or image/jpeg, depending on your data
     };
 
+    const openProfile = () => {
+        navigate(`/user/${user_id}`);
+    };
+
     return (
         <div className="profile overlay">
             <div className='profile-content overlay-component'>
@@ -67,11 +74,12 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ onClose, user_id }) => 
                     </div>
                 </div>
                 <p className='bio'>{profile.bio}</p>
+                <button onClick={openProfile}>Visit</button>
                 <button onClick={onClose}>Go Back</button>
-                <div>
+                {/* <div>
                     <h2 className='section-tite'>Reviews by {profile.username}</h2>
                     <CardScroll ids={profile.reviews} card_type='review'></CardScroll>
-                </div>
+                </div> */}
             </div>
         </div>
     );

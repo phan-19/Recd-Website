@@ -28,3 +28,16 @@
   font-size: 1rem;
 }
   
+/* Dropdown buttons on cards */
+.small-button {
+  background-color: #366b4b;
+  color: white;
+  padding: 0.9rem;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.small-button:hover {
+  background-color: #28543f;
+}

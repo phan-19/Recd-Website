@@ -50,7 +50,7 @@ const UserCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     };
 
     const routeToUser = () => {
-        navigate(`/user/${user_id}`, {
+        navigate(`/user/${user_id}/preview`, {
             state: { backgroundLocation: location },
         });
     };
