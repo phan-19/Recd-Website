@@ -4,6 +4,7 @@ import './media.css'
 
 import ReviewForm from '../../../components/forms/review-form/ReviewForm';
 import CardScroll from '../../../components/cards/card-scroll/CardScroll';
+import FollowButton from '../../../components/assets/follow-button/FollowButton';
 
 type Media = {
     media_id: number;
@@ -16,8 +17,8 @@ type Media = {
 }
 
 const Media: React.FC = ({ }) => {
-    const [ media, setMedia ] = useState<Media | null>(null);
-    const [ writingReview, setWritingReview ] = useState(false);
+    const [media, setMedia] = useState<Media | null>(null);
+    const [writingReview, setWritingReview] = useState(false);
 
     const { media_id } = useParams();
 
@@ -67,7 +68,10 @@ const Media: React.FC = ({ }) => {
                         className={'media-image'}
                     />
                 )}
-                <h2 className='title'>{media.media_name}</h2>
+                <div style={{ display: "flex", gap: "1em" }}>
+                    <h2 className='title'>{media.media_name}</h2>
+                    <FollowButton style="" type="media" followed_id={media.media_id} />
+                </div>
                 <h4 className='medium'><em>{media.medium}</em></h4>
                 <p className='description'>{media.description}</p>
                 <button type="button" onClick={toggleWriteReview}>Post a Review</button>

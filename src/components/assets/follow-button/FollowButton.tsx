@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import './FollowButton.css';
+import '../button/Button.css';
 
 type FollowButtonProps = {
     style: string;
     type: string;
-    follower_id: number;
     followed_id: number;
 };
 
-const FollowButton: React.FC<FollowButtonProps> = ({ style, type, follower_id, followed_id }) => {
+const FollowButton: React.FC<FollowButtonProps> = ({ style, type, followed_id }) => {
     const [following, setFollowing] = useState(false);
+    const [follower_id, setFollowerId] = useState<number | null>(null);
 
-    async function update() {
+    async function update(follower_id: number) {
         const url: string = `http://localhost:3000/follow/${type}/${follower_id}/${followed_id}`;
         const response = await fetch(url);
         const result = await response.json();
@@ -29,7 +29,9 @@ const FollowButton: React.FC<FollowButtonProps> = ({ style, type, follower_id, f
             body: JSON.stringify({ follower_id, followed_id })
         };
         const response = await fetch(url, options);
-        update();
+        if (follower_id) {
+            update(follower_id);
+        }
     }
 
     async function unfollow() {
@@ -38,13 +40,22 @@ const FollowButton: React.FC<FollowButtonProps> = ({ style, type, follower_id, f
             method: 'DELETE'
         };
         const response = await fetch(url, options);
-        update();
+        if (follower_id) {
+            update(follower_id);
+        }
     }
 
-    useEffect(() => { update() }, [followed_id, followed_id])
+    useEffect(() => {
+        const stored = localStorage.getItem('user');
+        if (stored) {
+            const storedUserId = JSON.parse(stored).user_id
+            setFollowerId(storedUserId);
+            update(storedUserId);
+        }
+    }, [followed_id, followed_id])
 
     function loadFollowButton() {
-        return (following ? <button className={style} onClick={() => unfollow()}>unfollow</button> : <button className={style} onClick={() => follow()}>follow</button>)
+        return (follower_id != followed_id || type == 'media' ? following ? <button className={style} onClick={() => unfollow()}>unfollow</button> : <button className={style} onClick={() => follow()}>follow</button> : null)
     }
 
     return (loadFollowButton())

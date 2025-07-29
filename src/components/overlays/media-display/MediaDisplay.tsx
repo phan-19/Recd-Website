@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import './MediaDisplay.css'
 
 import ReviewForm from '../../forms/review-form/ReviewForm'
-import CardScroll from '../../cards/card-scroll/CardScroll';
-import FollowButton from '../../assets/follow-button/FollowButton';
 
 type MediaDisplayProps = {
     onClose: () => void;
@@ -24,7 +22,6 @@ type Media = {
 const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
     const [media, setMedia] = useState<Media | null>(null);
     const [writingReview, setWritingReview] = useState(false);
-    const [user_id, setUser] = useState<number | null>(null);
 
     const navigate = useNavigate();
 
@@ -41,10 +38,6 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
                 console.error('Failed to fetch item:', err);
                 setMedia(null);
             });
-        const stored_user = localStorage.getItem("user");
-        if (stored_user) {
-            setUser(JSON.parse(stored_user).user_id);
-        }
     }, [media_id]);
 
     if (!media) {
@@ -84,10 +77,7 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
                         className={'media-image'}
                     />
                 )}
-                <div style={{ display: "flex", gap: "1em" }}>
-                    <h2 className='title'>{media.media_name}</h2>
-                    {user_id ? <FollowButton style="test" type="media" follower_id={user_id} followed_id={media_id} /> : null}
-                </div>
+                <h2 className='title'>{media.media_name}</h2>
                 <h4 className='medium'><em>{media.medium}</em></h4>
                 <p className='description'>{media.description}</p>
                 <button type='button' onClick={openPage}>Visit</button>
