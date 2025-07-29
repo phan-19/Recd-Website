@@ -57,13 +57,13 @@ const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     }, [id]);
 
     const handleMediaClick = () => {
-        navigate(`/media/${media_id}`, {
+        navigate(`/media/${media_id}/preview`, {
             state: { backgroundLocation: location },
         });
     };
 
     const handleUserClick = () => {
-        navigate(`/user/${user_id}`, {
+        navigate(`/user/${user_id}/preview`, {
             state: { backgroundLocation: location },
         });
     };
