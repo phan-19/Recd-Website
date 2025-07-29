@@ -40,12 +40,12 @@ const UserProfile: React.FC = () => {
         .then(data => setProfile(data))
         .catch(err => console.error('Failed to fetch profile:', err));
 
-      fetch(`http://localhost:3000/list/${storedUser.user_id}/watchlist`)
+      fetch(`http://localhost:3000/follow/list/${storedUser.user_id}/media`)
         .then(res => res.json())
         .then((data: MediaRes) => setWatchlist(data.result))
         .catch(err => console.error('Failed to fetch watchlist:', err));
 
-      fetch(`http://localhost:3000/list/${storedUser.user_id}/following`)
+      fetch(`http://localhost:3000/follow/list/${storedUser.user_id}/user`)
         .then(res => res.json())
         .then((data: MediaRes) => setFollowing(data.result))
         .catch(err => console.error('Failed to fetch following:', err));
@@ -107,7 +107,7 @@ const UserProfile: React.FC = () => {
       </div>
 
       <div>
-        <h2 className="section-title">Your Watchlist</h2>
+        <h2 className="section-title">To-Do</h2>
         <CardScroll ids={watchlist} card_type="media" />
       </div>
 
