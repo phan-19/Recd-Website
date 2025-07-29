@@ -3,3 +3,20 @@
     flex-direction: column;
     padding: 1rem;
 }
+
+.media-hamburger {
+    position: absolute;
+    right: auto;
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.media-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
