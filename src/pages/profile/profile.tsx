@@ -17,9 +17,11 @@ type Profile = {
 }
 
 const UserProfile: React.FC = () => {
-    const [ user, setUser ] = useState<User | null>(null);
-    const [ profile, setProfile ] = useState<Profile | null>(null);
-    
+    const [user, setUser] = useState<User | null>(null);
+    const [profile, setProfile] = useState<Profile | null>(null);
+    const [followedUsers, setFollowedUsers] = useState<number[]>([]);
+    const [followedMedia, setFollowedMedia] = useState<number[]>([]);
+
     useEffect(() => {
         const stored = localStorage.getItem('user');
         if (stored) {
@@ -34,7 +36,16 @@ const UserProfile: React.FC = () => {
                 .catch(err => {
                     console.error('Failed to fetch profile:', err);
                 });
-        } 
+
+            fetch(`http://localhost:3000/follow/list/${storedUser.user_id}/user`)
+                .then(response => response.json())
+                .then(result => { setFollowedUsers(result.following) })
+                .catch(err => { console.error("Failed to fetch followed users:", err) });
+            fetch(`http://localhost:3000/follow/list/${storedUser.user_id}/media`)
+                .then(response => response.json())
+                .then(result => { setFollowedMedia(result.following) })
+                .catch(err => { console.error("Failed to fetch followed users:", err) });
+        }
     }, []);
 
     const getProfilePicSrc = (bytes: number[]) => {
@@ -79,7 +90,15 @@ const UserProfile: React.FC = () => {
                 <h2 className='section-title'>Your Reviews</h2>
                 <CardScroll ids={profile.reviews} card_type='review' />
             </div>
-        </div>
+            <div>
+                <h2 className='section-title'>Followed Users</h2>
+                <CardScroll ids={followedUsers} card_type='user' />
+            </div>
+            <div>
+                <h2 className='section-title'>Followed Media</h2>
+                <CardScroll ids={followedMedia} card_type='media' />
+            </div>
+        </div >
     );
 }
 

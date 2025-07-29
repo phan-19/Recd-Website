@@ -3,7 +3,7 @@ import './MediaDisplay.css'
 
 import ReviewForm from '../../forms/review-form/ReviewForm'
 import CardScroll from '../../cards/card-scroll/CardScroll';
-import FollowButton from '../../assets/toggle-button/FollowButton';
+import FollowButton from '../../assets/follow-button/FollowButton';
 
 type MediaDisplayProps = {
     onClose: () => void;
