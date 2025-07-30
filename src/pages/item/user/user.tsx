@@ -4,6 +4,7 @@ import './user.css'
 
 import Button from '../../../components/assets/button/Button'
 import CardScroll from '../../../components/cards/card-scroll/CardScroll';
+import FollowButton from '../../../components/assets/follow-button/FollowButton';
 
 type User = {
     user_id: number,
@@ -19,12 +20,11 @@ type Profile = {
 }
 
 const User: React.FC = () => {
-    const [ profile, setProfile ] = useState<Profile | null>(null);
-    const [ menuOpen, setMenuOpen ] = useState(false);
+    const [profile, setProfile] = useState<Profile | null>(null);
+    const [menuOpen, setMenuOpen] = useState(false);
 
-    
     const { user_id } = useParams();
-    
+
     useEffect(() => {
         if (user_id) {
             fetch(`http://localhost:3000/page/user/${user_id}`)
@@ -35,7 +35,7 @@ const User: React.FC = () => {
                 .catch(err => {
                     console.error('Failed to fetch profile:', err);
                 });
-        } 
+        }
     }, []);
 
     const getProfilePicSrc = (bytes: number[]) => {
@@ -79,7 +79,8 @@ const User: React.FC = () => {
                                     onClick={() => {
                                         handleLogout();
                                     }}
-                                /> */}
+                                /> */
+                                    <FollowButton style='small-button' type='user' followed_id={profile.user_id} />}
                             </div>
                         </>
                     )}

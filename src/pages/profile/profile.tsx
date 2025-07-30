@@ -3,6 +3,8 @@ import './profile.css';
 
 import Button from '../../components/assets/button/Button';
 import CardScroll from '../../components/cards/card-scroll/CardScroll';
+import FollowingDisplay from '../../components/overlays/following-display/FollowingDisplay';
+import ToDoDisplay from '../../components/overlays/todo-display/TodoDisplay';
 
 type User = {
   user_id: number;
@@ -24,10 +26,12 @@ type MediaRes = {
 const UserProfile: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [watchlist, setWatchlist] = useState<number[]>([]);
-  const [following, setFollowing] = useState<number[]>([]);
+  const [followingUsers, setFollowingUsers] = useState<number[]>([]);
+  const [followingMedia, setFollowingMedia] = useState<number[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
+  const [viewFollowing, setViewFollowing] = useState("");
+  const [viewTodo, setViewTodo] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem('user');
@@ -40,14 +44,14 @@ const UserProfile: React.FC = () => {
         .then(data => setProfile(data))
         .catch(err => console.error('Failed to fetch profile:', err));
 
-      fetch(`http://localhost:3000/follow/list/${storedUser.user_id}/media`)
-        .then(res => res.json())
-        .then((data: MediaRes) => setWatchlist(data.result))
-        .catch(err => console.error('Failed to fetch watchlist:', err));
-
       fetch(`http://localhost:3000/follow/list/${storedUser.user_id}/user`)
         .then(res => res.json())
-        .then((data: MediaRes) => setFollowing(data.result))
+        .then(data => setFollowingUsers(data.following))
+        .catch(err => console.error('Failed to fetch following:', err));
+
+      fetch(`http://localhost:3000/follow/list/${storedUser.user_id}/media`)
+        .then(res => res.json())
+        .then(data => setFollowingMedia(data.following))
         .catch(err => console.error('Failed to fetch following:', err));
     }
   }, []);
@@ -80,6 +84,32 @@ const UserProfile: React.FC = () => {
             />
           )}
           <h2 className="username">@{profile.username}</h2>
+          <div style={{ display: 'flex', gap: 15 }}>
+            <div className="count" style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
+              <span>Review</span>
+              <span>Count</span>
+              <span>{profile.reviews.length}</span>
+            </div>
+            <div className="count" style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
+              <span>Followed</span>
+              <span>Users</span>
+              <button onClick={() => setViewFollowing("user")}>{followingUsers.length}</button>
+            </div>
+            <div className="count" style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
+              <span>Followed</span>
+              <span>Media</span>
+              <button onClick={() => setViewFollowing("media")}>{followingMedia.length}</button>
+            </div>
+            <div className="count" style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
+              <span>ToDo</span>
+              <span>List</span>
+              <button onClick={() => setViewTodo(true)}>View</button>
+            </div>
+          </div>
+          {viewFollowing && (
+            <FollowingDisplay following={viewFollowing == "user" ? followingUsers : followingMedia} type={viewFollowing} onClose={() => setViewFollowing("")} />
+          )}
+          {viewTodo && (<ToDoDisplay user_id={user.user_id} onClose={() => setViewTodo(false)} />)}
           <button className="profile-hamburger" onClick={() => setMenuOpen(!menuOpen)}>
             ☰
           </button>
@@ -105,17 +135,7 @@ const UserProfile: React.FC = () => {
         <h2 className="section-title">Your Reviews</h2>
         <CardScroll ids={profile.reviews} card_type="review" />
       </div>
-
-      <div>
-        <h2 className="section-title">To-Do</h2>
-        <CardScroll ids={watchlist} card_type="media" />
-      </div>
-
-      <div>
-        <h2 className="section-title">Following</h2>
-        <CardScroll ids={following} card_type="user" />
-      </div>
-    </div>
+    </div >
   );
 };
 

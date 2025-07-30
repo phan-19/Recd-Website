@@ -21,8 +21,8 @@ type Media = {
 }
 
 const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
-    const [ media, setMedia ] = useState<Media | null>(null);
-    const [ writingReview, setWritingReview ] = useState(false);
+    const [media, setMedia] = useState<Media | null>(null);
+    const [writingReview, setWritingReview] = useState(false);
 
     const navigate = useNavigate();
 

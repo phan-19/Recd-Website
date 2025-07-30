@@ -18,8 +18,8 @@ type Media = {
 }
 
 const Media: React.FC = ({ }) => {
-    const [ media, setMedia ] = useState<Media | null>(null);
-    const [ writingReview, setWritingReview ] = useState(false);
+    const [media, setMedia] = useState<Media | null>(null);
+    const [writingReview, setWritingReview] = useState(false);
 
     const { media_id } = useParams();
 
