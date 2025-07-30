@@ -20,10 +20,8 @@ type Profile = {
 }
 
 const User: React.FC = () => {
-    const [user, setUser] = useState<User | null>(null);
     const [profile, setProfile] = useState<Profile | null>(null);
     const [menuOpen, setMenuOpen] = useState(false);
-
 
     const { user_id } = useParams();
 

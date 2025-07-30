@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import './media.css'
+import './media.css';
 
 import ReviewForm from '../../../components/forms/review-form/ReviewForm';
 import CardScroll from '../../../components/cards/card-scroll/CardScroll';
@@ -59,21 +59,22 @@ const Media: React.FC = ({ }) => {
     };
 
     return (
-        <div className='media-page'>
-            <div>
-                {media.image.length > 0 && (
-                    <img
-                        src={displayImage(media.image)}
-                        alt={media.media_name}
-                        className={'media-image'}
-                    />
-                )}
-                <div style={{ display: "flex", gap: "1em" }}>
-                    <h2 className='title'>{media.media_name}</h2>
-                    <FollowButton style="" type="media" followed_id={media.media_id} />
+        <div>
+            <div className='media-page'>
+                <div className='header'>
+                    <div className='header-text'>
+                        <h2 className='section-title'>{media.media_name}</h2>
+                        <h4 className='medium'><em>{media.medium}</em></h4>
+                        <p className='description'>{media.description}</p>
+                    </div>
+                    {media.image.length > 0 && (
+                        <img
+                            src={displayImage(media.image)}
+                            alt={media.media_name}
+                            className='media-image'
+                        />
+                    )}
                 </div>
-                <h4 className='medium'><em>{media.medium}</em></h4>
-                <p className='description'>{media.description}</p>
                 <button type="button" onClick={toggleWriteReview}>Post a Review</button>
                 <div>
                     <CardScroll ids={media.reviews} card_type='review' />
