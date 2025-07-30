@@ -115,7 +115,7 @@ const UserProfile: React.FC = () => {
         <h2 className="section-title">Following</h2>
         <CardScroll ids={following} card_type="user" />
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -61,6 +61,7 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ onClose, user_id }) => 
                         />
                     )}
                     <h2 className='username'>{'@'}{profile.username}</h2>
+
                 </div>
                 <p className='bio'>{profile.bio}</p>
                 <button onClick={openProfile}>Visit</button>

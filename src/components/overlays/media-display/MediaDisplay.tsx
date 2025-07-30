@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import './MediaDisplay.css'
 
 import ReviewForm from '../../forms/review-form/ReviewForm'
-import CardScroll from '../../cards/card-scroll/CardScroll';
 
 type MediaDisplayProps = {
     onClose: () => void;
@@ -21,8 +20,8 @@ type Media = {
 }
 
 const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
-    const [ media, setMedia ] = useState<Media | null>(null);
-    const [ writingReview, setWritingReview ] = useState(false);
+    const [media, setMedia] = useState<Media | null>(null);
+    const [writingReview, setWritingReview] = useState(false);
 
     const navigate = useNavigate();
 

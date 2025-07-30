@@ -4,6 +4,7 @@ import './media.css';
 
 import ReviewForm from '../../../components/forms/review-form/ReviewForm';
 import CardScroll from '../../../components/cards/card-scroll/CardScroll';
+import FollowButton from '../../../components/assets/follow-button/FollowButton';
 
 type Media = {
     media_id: number;
@@ -16,8 +17,8 @@ type Media = {
 }
 
 const Media: React.FC = ({ }) => {
-    const [ media, setMedia ] = useState<Media | null>(null);
-    const [ writingReview, setWritingReview ] = useState(false);
+    const [media, setMedia] = useState<Media | null>(null);
+    const [writingReview, setWritingReview] = useState(false);
 
     const { media_id } = useParams();
 
