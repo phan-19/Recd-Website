@@ -1,0 +1,15 @@
+.overlay .following-content {
+    background-color: #242424;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 60%;
+    min-width: 300px;
+    border-radius: 2.5px;
+    max-height: 90vh;
+    overflow-y: scroll;
+    padding: 1rem;
+}
+
+.overlay {
+    padding: 0.25rem;
+}
