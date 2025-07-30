@@ -12,7 +12,6 @@ import Media from './pages/item/media/media';
 import User from './pages/item/user/user';
 
 //Overlays
-import ReviewDisplay from './components/overlays/review-display/ReviewDisplay';
 import MediaOverlay from './components/overlays/media-display/MediaOverlay'
 import ProfileOverlay from './components/overlays/profile-display/ProfileOverlay';
 
@@ -46,12 +45,6 @@ const AppRoutes: React.FC = () => {
                 element={
                   <MediaOverlay />
                 }
-            />
-            <Route 
-                path='/review/:review_id/preview' 
-                element={
-                  <ReviewDisplay />
-                } 
             />
             <Route 
                 path='/user/:user_id/preview' 
