@@ -3,8 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: #d4d4d4;
   background-color: #242424;
 
   font-synthesis: none;
@@ -38,23 +37,11 @@ h1 {
   font-weight: lighter;
   margin: 1rem auto;
   text-align: center;
+  color: #d4d4d4;
 }
 
 .card-list {
   margin: 0rem 1rem 0rem 1rem;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 .overlay {
