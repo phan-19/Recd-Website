@@ -70,7 +70,7 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
 
     return (
         <div className="media-page overlay">
-            <div className='media-content overlay-component'>
+            <div className='media-content'>
                 {media.image.length > 0 && (
                     <img
                         src={displayImage(media.image)}
@@ -78,19 +78,16 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
                         className={'media-image'}
                     />
                 )}
-                <h2 className='title'>{media.media_name}</h2>
+                <h2 className='section-title'>{media.media_name}</h2>
                 <h4 className='medium'><em>{media.medium}</em></h4>
                 <p className='description'>{media.description}</p>
                 <button type='button' onClick={openPage}>Visit</button>
                 <button type="button" onClick={toggleWriteReview}>Post a Review</button>
                 <button type='button' onClick={onClose}>Go Back</button>
-                {/* <div>
-                    <CardScroll ids={media.reviews} card_type='review' />
-                </div> */}
             </div>
             {writingReview && (
                 <div className='overlay'>
-                    <div className='overlay-component'>
+                    <div className=''>
                         <ReviewForm onClose={toggleWriteReview} media={media} />
                     </div>
                 </div>
