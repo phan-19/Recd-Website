@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import '../../profile/profile.css'
 
-import Button from '../../../components/assets/button/Button'
 import CardScroll from '../../../components/cards/card-scroll/CardScroll';
 import FollowButton from '../../../components/assets/follow-button/FollowButton';
 import FollowingDisplay from '../../../components/overlays/following-display/FollowingDisplay';
+import UserInfo from '../../../components/assets/user-info/UserInfo';
 
 type User = {
     user_id: number,
@@ -77,26 +77,7 @@ const User: React.FC = () => {
 
                     {/* Following Counts and Stuff */}
                     <div className='user-info'>
-                    <div className='count' style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
-                        <button>
-                        Posted<br/>
-                        <strong>{profile.reviews.length}</strong>
-                        {profile.reviews.length === 1 ? ' Review' : ' Reviews'}
-                        </button>
-                    </div>
-                    <div className='count' style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
-                        <button onClick={() => setViewFollowing('user')}>
-                        Follows<br/>
-                        <strong>{followingUsers.length}</strong>
-                        {followingUsers.length === 1 ? ' User' : ' Users'}
-                        </button>
-                    </div>
-                    <div className='count' style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
-                        <button onClick={() => setViewFollowing('media')}>
-                        Follows<br/>
-                        <strong>{followingMedia.length}</strong> Media
-                        </button>
-                    </div>
+                    <UserInfo profile={profile} followingUsers={followingUsers} followingMedia={followingMedia} />
                 </div>
                     
                 {/* Hamburger Menu */}

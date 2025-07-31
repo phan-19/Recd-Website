@@ -93,9 +93,9 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
                         />
                     )}
                 </div>
-                <div className='buttons'>
+                <div className='popup-buttons'>
                     <Button buttonStyle='small-button' buttonText='Visit' onClick={openPage} />
-                    {user_id && <FollowButton style='small-button' type='media' followed_id={media.media_id} />}
+                    {user_id && <FollowButton style='small-button' type='media' followed_id={media_id} />}
                     <Button buttonStyle='small-button' buttonText='Review' onClick={toggleWriteReview} />
                     <Button buttonStyle='small-button' buttonText='Exit' onClick={onClose} />
                 </div>

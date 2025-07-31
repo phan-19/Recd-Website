@@ -21,7 +21,7 @@
 }
 
 .auth-page .login-title {
-    color: #272727;
+    color: #242424;
     font-size: 2rem;
     font-weight: normal;
     margin: 1rem auto;
@@ -44,6 +44,8 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #242424;
+    color: #e4e4e4
 }
 
 .auth-page .user-login button {
