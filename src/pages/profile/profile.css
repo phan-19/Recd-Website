@@ -1,18 +1,22 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+}
+
 .user .profile-content {
-    border: 1px solid #000;
+    width: 60%;
     min-width: 300px;
-    min-height: 200px;
     border-radius: 2.5px;
-    margin: 0.5rem;
     padding: 1rem;
     background-color: rgb(66, 76, 71);
     box-shadow: 0 2px 5px black;
-    
+    margin: 0 auto;
+    margin-top: 0.5rem;
 }
 
 .user .profile-header {
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: 0.5rem;
     margin-bottom: 0.75rem;
     position: relative;
@@ -40,11 +44,23 @@
     overflow-y: auto;
 }
 
+.count button {
+    background-color: #38403c;
+    border-radius: 2.5px;
+    border: 0;
+    padding: 0.5rem;
+    color: #d0d0d0;
+}
+
+.count button:hover {    
+    background-color: #2d3330;
+}
+
 .profile-hamburger {
-  margin-left: auto;
   background: none;
-  color: white;
-  border: none;
+  color: #d0d0d0;
+  border: 0;
+  margin: 0;
   cursor: pointer;
   font-size: 2rem;
 }
@@ -63,4 +79,19 @@
 
 .profile-dropdown-menu.menu-open {
     display: flex;
+}
+
+.user-info {
+    display: flex;
+    gap: 1rem;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+@media (max-width: 672px) {
+    .user .profile-content {
+        max-width: none;
+        min-width: none;
+        width: 92%;
+    }
 }

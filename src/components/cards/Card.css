@@ -1,11 +1,11 @@
 .card {
-    border: 1px solid #000;
     min-width: 200px;
     max-width: 200px;
     min-height: 250px;
     overflow: hidden;
     background-color: rgb(66, 76, 71);
     box-shadow: 0 2px 5px black;
+    border-radius: 2.5px;
     display: flex;
     flex-direction: column;
 }
@@ -73,9 +73,10 @@
     color: rgb(164, 255, 168);
 }
 
-.card-rating {
-    margin: 0.1rem 0;
-    font-size: 1rem;
+.card .star-rating {
+    font-size: 1.5rem;
+    margin: 0;
+    align-self: center;
 }
 
 .card-description {
@@ -83,7 +84,7 @@
     color: #d0d0d0;
     max-height: 7rem;
     overflow-y: auto;
-    margin-bottom: 0;
+    margin: 0;
 }
 
 .card-content.footer {
@@ -94,14 +95,6 @@
     padding-bottom: 0;
     height: fit-content;
     align-items: flex-end;
-}
-
-.card-description::-webkit-scrollbar {
-    width: 4px;
-}
-.card-description::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
 }
 
 /* Card Resizing for different screen sizes */

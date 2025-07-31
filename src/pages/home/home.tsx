@@ -8,6 +8,7 @@ export default function Home() {
     const [ recommended, setRecommended ] = useState<number[]>([]);
     const [ recent_media, setRecentMedia ] = useState<number[]>([]);
     const [ reviews, setReviews ] = useState<number[]>([]);
+    const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
         const stored = localStorage.getItem('user');
@@ -34,13 +35,14 @@ export default function Home() {
             } catch (err) {
                 console.error('Failed to fetch homepage data:', err);
             }
+            setLoading(false);
         };
 
         loadHomePageData();
     }, [user_id]);
 
     // The body of the home page
-    return (
+    if (!loading) return (
         <main className='container-fluid p-4'>
             <div className='row'>
                 <div className='col-lg-6 col-md-12 mb-4'>
@@ -67,5 +69,7 @@ export default function Home() {
                 </div>
             </div>
         </main>
+    ); else return (
+        <div className="spinner" role="status" aria-label="Loading"></div>
     );
 };

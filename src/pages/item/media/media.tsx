@@ -65,7 +65,7 @@ const Media: React.FC = ({ }) => {
                 <div className='header'>
                     <div className='header-text'>
                         <h2 className='section-title'>{media.media_name}</h2>
-                        <h4 className='medium'><em>{media.medium}</em></h4>
+                        <h4 className='medium'><em>- {media.medium} -</em></h4>
                         <p className='description'>{media.description}</p>
                     </div>
                     {media.image.length > 0 && (

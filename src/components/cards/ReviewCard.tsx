@@ -75,7 +75,7 @@ const ReviewCard: React.FC<CardProps> = ({ cardStyle, id }) => {
                 <h4 className='card-username'>Review by: {' '}
                     <button className='card-username-button' onClick={handleUserClick}>{username}</button>
                 </h4>
-                <div className='card-rating'>
+                <div className='rating-container'>
                     <StarRating rating={rating || 0} /> <span style={{marginLeft: '0.5rem'}}></span>
                 </div>
                 <p className='card-description'>{review_txt}</p>

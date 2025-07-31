@@ -3,13 +3,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .search-input {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    padding: 1rem;
-    font-size: 1rem;
+  flex-grow: 1;
+  border: 1px solid black;
+  border-radius: 2.5px;
+  outline: none;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #1b1b1b;
+  color: #d4d4d4;
 }
