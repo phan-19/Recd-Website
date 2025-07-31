@@ -34,7 +34,7 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
             const user = JSON.parse(userStored);
             setUserId(user.user_id);
         }
-        
+
         fetch(`http://localhost:3000/page/media/${media_id}`)
             .then(response => {
                 if (!response.ok) throw new Error('Failed to fetch media');
@@ -95,7 +95,7 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
                 </div>
                 <div className='buttons'>
                     <Button buttonStyle='small-button' buttonText='Visit' onClick={openPage} />
-                    {user_id && <FollowButton style='small-button' type='media' followed_id={user_id} />}
+                    {user_id && <FollowButton style='small-button' type='media' followed_id={media.media_id} />}
                     <Button buttonStyle='small-button' buttonText='Review' onClick={toggleWriteReview} />
                     <Button buttonStyle='small-button' buttonText='Exit' onClick={onClose} />
                 </div>
