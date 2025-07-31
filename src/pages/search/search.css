@@ -5,3 +5,18 @@
 .status.error { 
   color: #c00; 
 }
+
+.add-item-prompt {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+}
+
+.add-item-prompt p {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.add-item-prompt button {
+  margin-right: 1rem;
+}

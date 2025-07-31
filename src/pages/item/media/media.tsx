@@ -5,6 +5,7 @@ import './media.css';
 import ReviewForm from '../../../components/forms/review-form/ReviewForm';
 import CardScroll from '../../../components/cards/card-scroll/CardScroll';
 import FollowButton from '../../../components/assets/follow-button/FollowButton';
+import Button from '../../../components/assets/button/Button';
 
 type Media = {
     media_id: number;
@@ -39,7 +40,7 @@ const Media: React.FC = ({ }) => {
 
     if (!media) {
         return (
-            <div className="media-page overlay">
+            <div className='media-page overlay'>
                 <div className='media-content overlay-component'>
                     <p>Media not found.</p>
                 </div>
@@ -64,7 +65,7 @@ const Media: React.FC = ({ }) => {
                 <div className='header'>
                     <div className='header-text'>
                         <h2 className='section-title'>{media.media_name}</h2>
-                        <h4 className='medium'><em>{media.medium}</em></h4>
+                        <h4 className='medium'><em>- {media.medium} -</em></h4>
                         <p className='description'>{media.description}</p>
                     </div>
                     {media.image.length > 0 && (
@@ -75,7 +76,10 @@ const Media: React.FC = ({ }) => {
                         />
                     )}
                 </div>
-                <button type="button" onClick={toggleWriteReview}>Post a Review</button>
+                <div className='buttons'>
+                    <Button buttonStyle='small-button' buttonText='Review' onClick={toggleWriteReview} />
+                    <FollowButton style='small-button' type='media' followed_id={media.media_id} />
+                </div>
                 <div>
                     <CardScroll ids={media.reviews} card_type='review' />
                 </div>

@@ -10,12 +10,13 @@ type ReviewFormProps = {
 };
 
 const ReviewForm: React.FC<ReviewFormProps> = ({ onClose, media }) => {
-    const [ rating, setRating ] = useState(0);
+    const [ rating, setRating ] = useState<number>(1);
     const [ review_txt, setReview ] = useState('');
     const [ message, setMessage ] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        onClose();
 
         var url = `http://localhost:3000/review`;
 
@@ -69,15 +70,19 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onClose, media }) => {
                 onChange={(e) => setReview(e.target.value)}
                 required
             />
-            <input //I want to make this a small star rating thing later - Jules
-                type="number"
-                min="1"
-                max="5"
-                placeholder="Rating (out of 5)"
-                value={rating}
-                onChange={(e) => setRating(Number(e.target.value))}
-                required
-            />
+            <div className='rating-container'>
+                <div className="star-rating">
+                    {[1,2,3,4,5].map((star) => (
+                        <span
+                        key={star}
+                        className={star <= rating ? 'filled-star' : ''}
+                        onClick={() => setRating(star)}
+                        >
+                        ★
+                        </span>
+                    ))}
+                </div>
+            </div>
             <button type="submit">Post Review</button>
             <button type="button" onClick={onClose}>Cancel</button>
             {message && <p>{message}</p>}

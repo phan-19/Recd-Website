@@ -30,7 +30,7 @@ const UserProfile: React.FC = () => {
   const [followingMedia, setFollowingMedia] = useState<number[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
-  const [viewFollowing, setViewFollowing] = useState("");
+  const [viewFollowing, setViewFollowing] = useState('');
   const [viewTodo, setViewTodo] = useState(false);
 
   useEffect(() => {
@@ -73,69 +73,79 @@ const UserProfile: React.FC = () => {
   if (!profile) return <p>Loading profile...</p>;
 
   return (
-    <div className="profile user">
-      <div className="profile-content">
-        <div className="profile-header">
-          {profile.profile_pic.length > 0 && (
-            <img
-              src={getProfilePicSrc(profile.profile_pic)}
-              alt={`${profile.username}'s profile`}
-              className="profile-pic"
-            />
-          )}
-          <h2 className="username">@{profile.username}</h2>
-          <div style={{ display: 'flex', gap: 15 }}>
-            <div className="count" style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
-              <span>Review</span>
-              <span>Count</span>
-              <span>{profile.reviews.length}</span>
-            </div>
-            <div className="count" style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
-              <span>Followed</span>
-              <span>Users</span>
-              <button onClick={() => setViewFollowing("user")}>{followingUsers.length}</button>
-            </div>
-            <div className="count" style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
-              <span>Followed</span>
-              <span>Media</span>
-              <button onClick={() => setViewFollowing("media")}>{followingMedia.length}</button>
-            </div>
-            <div className="count" style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
-              <span>ToDo</span>
-              <span>List</span>
-              <button onClick={() => setViewTodo(true)}>View</button>
-            </div>
+      <div className='profile user'>
+        <div className='profile-content'>
+          <div className='profile-header'>
+            {/* Profile Picture */}
+            {profile.profile_pic.length > 0 && (
+              <img
+                src={getProfilePicSrc(profile.profile_pic)}
+                alt={`${profile.username}'s profile`}
+                className='profile-pic'
+              />
+            )}
+
+            {/* Username */}
+            <h2 className='username'>@{profile.username}</h2>
+
+            {/* Following Counts and Stuff */}
+            <div className='user-info'>
+              <div className='count' style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
+                <button>
+                  Posted<br/>
+                  <strong>{profile.reviews.length}</strong>
+                  {profile.reviews.length === 1 ? ' Review' : ' Reviews'}
+                </button>
+              </div>
+              <div className='count' style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
+                <button onClick={() => setViewFollowing('user')}>
+                  Follows<br/>
+                  <strong>{followingUsers.length}</strong>
+                  {followingUsers.length === 1 ? ' User' : ' Users'}
+                </button>
+              </div>
+              <div className='count' style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
+                <button onClick={() => setViewFollowing('media')}>
+                  Follows<br/>
+                  <strong>{followingMedia.length}</strong> Media
+                </button>
+              </div>
           </div>
-          {viewFollowing && (
-            <FollowingDisplay following={viewFollowing == "user" ? followingUsers : followingMedia} type={viewFollowing} onClose={() => setViewFollowing("")} />
-          )}
-          {viewTodo && (<ToDoDisplay user_id={user.user_id} onClose={() => setViewTodo(false)} />)}
-          <button className="profile-hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-            ☰
+            
+          {/* Hamburger Menu */}
+          <button className='profile-hamburger' onClick={() => setMenuOpen(!menuOpen)}>
+            ⋮
           </button>
           {menuOpen && (
             <div className={`profile-dropdown-menu ${menuOpen ? 'menu-open' : ''}`}>
               <Button
-                buttonStyle="small-button"
-                buttonText="Edit Profile"
+                buttonStyle='small-button'
+                buttonText='Edit Profile'
                 onClick={() => setEditProfile(true)}
               />
               <Button
-                buttonStyle="small-button"
-                buttonText="Logout"
+                buttonStyle='small-button'
+                buttonText='Logout'
                 onClick={handleLogout}
               />
             </div>
           )}
         </div>
-        <p className="bio">{profile.bio}</p>
-      </div>
 
-      <div>
-        <h2 className="section-title">Your Reviews</h2>
-        <CardScroll ids={profile.reviews} card_type="review" />
+        {/* Bio */}
+        <p className='bio'>{profile.bio}</p>
+        </div>
+
+
+        {/* Card Scrolls */}
+        <div>
+          <h2 className='section-title'>Your Reviews</h2>
+          <CardScroll ids={profile.reviews} card_type='review' />
+        </div>
+
+        {/* Conditional Following and To-Do Rendering */}
+        {viewFollowing && (<FollowingDisplay following={viewFollowing == 'user' ? followingUsers : followingMedia} type={viewFollowing} onClose={() => setViewFollowing('')} />)}
       </div>
-    </div >
   );
 };
 

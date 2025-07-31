@@ -41,13 +41,13 @@ export default function Search({ initialQuery = '' }: SearchProps) {
       const response = await fetch(`http://localhost:3000/search/media/${encodeURIComponent(term)}`);
       if (!response.ok) throw new Error('Media fetch failed');
       return await response.json();
-    }
+    };
 
     async function searchUsers(term: string): Promise<UserRes> {
       const response = await fetch(`http://localhost:3000/search/user/${encodeURIComponent(term)}`);
       if (!response.ok) throw new Error('User fetch failed');
       return await response.json();
-    }
+    };
 
     const timer = setTimeout(() => {
       Promise.all([searchMedia(query), searchUsers(query)])
@@ -79,22 +79,23 @@ export default function Search({ initialQuery = '' }: SearchProps) {
       </div>
 
       {/* Post Media Button */}
-      <div className="row justify-content-center mb-4">
-        <div className="col-lg-8 col-md-8 col-sm-12 text-end">
-          <Button
-            buttonStyle='add-item'
-            buttonText='Add an Item'
-            onClick={() => setPostMedia(true)}
-          />
-        </div>
+      <div className='add-item-prompt'>
+        <p><em>Can't find it?</em></p>
+        <Button
+          buttonStyle='add-item'
+          buttonText='Add an Item'
+          onClick={() => setPostMedia(true)}
+        />
       </div>
 
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <div className="spinner" role="status" aria-label="Loading"></div>
+      )}
 
       {/* Media Row */}
       {!!media.length && (
         <section className='mb-5'>
-          <h3 className='mb-3 section-title'>Media Containing "{query}"</h3>
+          <h3 className='mb-3 section-title'>Media Containing '{query}'</h3>
           <div>
             <CardScroll 
               ids={media} card_type='media'
@@ -106,7 +107,7 @@ export default function Search({ initialQuery = '' }: SearchProps) {
       {/* User Row */}
       {!!users.length && (
         <section className='mb-5'>
-          <h3 className='mb-3 section-title'>Users Containing "{query}"</h3>
+          <h3 className='mb-3 section-title'>Users Containing '{query}'</h3>
           <div>
             <CardScroll 
               ids={users} card_type='user'

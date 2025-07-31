@@ -55,7 +55,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({ style, type, followed_id })
     }, [followed_id, followed_id])
 
     function loadFollowButton() {
-        return (follower_id != followed_id || type == 'media' ? following ? <button className={style} onClick={() => unfollow()}>unfollow</button> : <button className={style} onClick={() => follow()}>follow</button> : null)
+        return (follower_id != followed_id || type == 'media' ? following ? <button className={style} onClick={() => unfollow()}>Unfollow</button> : <button className={style} onClick={() => follow()}>Follow</button> : null)
     }
 
     return (loadFollowButton())

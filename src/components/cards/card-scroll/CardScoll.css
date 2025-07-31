@@ -6,23 +6,6 @@
   margin: 0.5rem;
 }
 
-.cards::-webkit-scrollbar {
-  height: 12px;
-}
-
-.cards::-webkit-scrollbar-thumb,
-.cards::-webkit-scrollbar-track {
-  border-radius: 92px;
-}
-
-.cards::-webkit-scrollbar-thumb {
-  background: var(--darkred);
-}
-
-.cards::-webkit-scrollbar-track {
-  background: var(--thumb);
-}
-
 /* Card Resizing for different screen sizes */
 .card:not(:last-child) {
     margin-right: 4px;

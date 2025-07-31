@@ -6,13 +6,15 @@
     margin: auto;
     padding: 20px;
     border-radius: 2.5%;
-    background: #f2f2f2;
+    background: #e4e4e4;
 }
 
 .media-form .section-title {
     color: #272727;
     font-weight: normal;
     font-size: 1.5rem;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .media-form input,
@@ -20,12 +22,19 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #272727;
+    color: #e4e4e4;
 }
 
 .media-form textarea {
     height: 100px;
     resize: vertical;
     overflow-y: auto;
+}
+
+.media-form select {
+    background-color: #272727;
+    color: #e4e4e4;
 }
 
 .media-form button {

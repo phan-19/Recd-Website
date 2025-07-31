@@ -53,7 +53,7 @@ export default function Navbar() {
                 <Button
                   buttonStyle={`nav-button ${isActive(page)}`}
                   buttonText={page.toUpperCase()}
-                  onClick={() => navigate(page === 'home' ? '/' : `/${page}`)}
+                  onClick={() => {navigate(page === 'home' ? '/' : `/${page}`), setMenuOpen(false)}}
                 />
               </li>
             ))}

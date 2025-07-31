@@ -3,7 +3,7 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
     return (
         <span className="star-rating">
             {Array.from({ length: 5 }, (_, i) => (
-                <span key={i} style={{ color: i < fullStars ? 'gold' : '#ccc' }}>★</span>
+                <span key={i} style={{ color: i < fullStars ? 'rgba(170, 149, 28, 1)' : '#686868ff' }}>★</span>
             ))}
         </span>
     );

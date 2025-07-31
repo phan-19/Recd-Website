@@ -1,7 +1,8 @@
 .media-page {
-    display: flex;
-    flex-direction: column;
     padding: 1rem;
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .media-page .header {
@@ -41,7 +42,26 @@
     height: auto;
 }
 
+.media-page .buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.media-page .small-button {
+    margin: 0.25rem;
+}
+
+@media (max-width: 900px) {
+    .media-page {
+        max-width: 80%;
+    }
+}
+
 @media (max-width: 672px) {
+    .media-page {
+        max-width: none;
+    }
+    
     .media-page .header {
         flex-direction: column;
     }
