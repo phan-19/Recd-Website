@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ProfileDisplay.css';
 
+import Button from '../../assets/button/Button';
+import FollowButton from '../../assets/follow-button/FollowButton';
+
 type ProfileDisplayProps = {
     onClose: () => void,
     user_id: number,
@@ -45,7 +48,7 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ onClose, user_id }) => 
         return `data:image/png;base64,${base64String}`; // or image/jpeg, depending on your data
     };
 
-    const openProfile = () => {
+    const openPage = () => {
         navigate(`/user/${user_id}`);
     };
 
@@ -64,8 +67,11 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ onClose, user_id }) => 
 
                 </div>
                 <p className='bio'>{profile.bio}</p>
-                <button onClick={openProfile}>Visit</button>
-                <button onClick={onClose}>Go Back</button>
+                <div className='popup-buttons'>
+                    <Button buttonStyle='small-button' buttonText='Visit' onClick={openPage} />
+                    <FollowButton style='small-button' type='user' followed_id={profile.user_id} />
+                    <Button buttonStyle='small-button' buttonText='Exit' onClick={onClose} />
+                </div>
             </div>
         </div>
     );

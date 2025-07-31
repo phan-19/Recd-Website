@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
 }
 
 .auth-page .signup-title {
@@ -36,6 +37,8 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #242424;
+    color: #e4e4e4;
 }
 
 .auth-page .user-signup textarea {

@@ -3,8 +3,7 @@ import './profile.css';
 
 import Button from '../../components/assets/button/Button';
 import CardScroll from '../../components/cards/card-scroll/CardScroll';
-import FollowingDisplay from '../../components/overlays/following-display/FollowingDisplay';
-import ToDoDisplay from '../../components/overlays/todo-display/TodoDisplay';
+import UserInfo from '../../components/assets/user-info/UserInfo';
 
 type User = {
   user_id: number;
@@ -19,10 +18,6 @@ type Profile = {
   reviews: number[];
 };
 
-type MediaRes = {
-  result: number[];
-};
-
 const UserProfile: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -30,8 +25,6 @@ const UserProfile: React.FC = () => {
   const [followingMedia, setFollowingMedia] = useState<number[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
-  const [viewFollowing, setViewFollowing] = useState('');
-  const [viewTodo, setViewTodo] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem('user');
@@ -77,10 +70,16 @@ const UserProfile: React.FC = () => {
         <div className='profile-content'>
           <div className='profile-header'>
             {/* Profile Picture */}
-            {profile.profile_pic.length > 0 && (
+            {profile.profile_pic.length > 0 ? (
               <img
                 src={getProfilePicSrc(profile.profile_pic)}
                 alt={`${profile.username}'s profile`}
+                className='profile-pic'
+              />
+            ) : (
+              <img
+                src={''} //Put default image here
+                alt={'No Profile Photo'}
                 className='profile-pic'
               />
             )}
@@ -90,27 +89,8 @@ const UserProfile: React.FC = () => {
 
             {/* Following Counts and Stuff */}
             <div className='user-info'>
-              <div className='count' style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
-                <button>
-                  Posted<br/>
-                  <strong>{profile.reviews.length}</strong>
-                  {profile.reviews.length === 1 ? ' Review' : ' Reviews'}
-                </button>
-              </div>
-              <div className='count' style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
-                <button onClick={() => setViewFollowing('user')}>
-                  Follows<br/>
-                  <strong>{followingUsers.length}</strong>
-                  {followingUsers.length === 1 ? ' User' : ' Users'}
-                </button>
-              </div>
-              <div className='count' style={{ textAlign: 'center', display: 'grid', margin: 0 }}>
-                <button onClick={() => setViewFollowing('media')}>
-                  Follows<br/>
-                  <strong>{followingMedia.length}</strong> Media
-                </button>
-              </div>
-          </div>
+              <UserInfo profile={profile} followingUsers={followingUsers} followingMedia={followingMedia} />
+            </div>
             
           {/* Hamburger Menu */}
           <button className='profile-hamburger' onClick={() => setMenuOpen(!menuOpen)}>
@@ -142,9 +122,6 @@ const UserProfile: React.FC = () => {
           <h2 className='section-title'>Your Reviews</h2>
           <CardScroll ids={profile.reviews} card_type='review' />
         </div>
-
-        {/* Conditional Following and To-Do Rendering */}
-        {viewFollowing && (<FollowingDisplay following={viewFollowing == 'user' ? followingUsers : followingMedia} type={viewFollowing} onClose={() => setViewFollowing('')} />)}
       </div>
   );
 };
