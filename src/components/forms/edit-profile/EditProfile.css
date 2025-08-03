@@ -1,27 +1,4 @@
-.auth-page body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.auth-page main {
-    min-height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
-}
-
-.auth-page .signup-title {
-    color: #272727;
-    font-size: 2rem;
-    font-weight: normal;
-    margin: 1rem auto;
-    width: 50%;
-    text-align: center;
-}
-
-.auth-page .user-signup {
+.overlay .user-edit {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -29,11 +6,20 @@
     margin: auto;
     padding: 20px;
     border-radius: 2.5%;
-    background: #f2f2f2;
+    background: #e4e4e4;
 }
 
-.auth-page .user-signup input,
-.auth-page .user-signup textarea {
+.user-edit .edit-title {
+    color: #272727;
+    font-size: 2rem;
+    font-weight: normal;
+    margin: 1rem auto;
+    width: fit-content;
+    text-align: center;
+}
+
+.user-edit input,
+.user-edit textarea {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -41,13 +27,13 @@
     color: #e4e4e4;
 }
 
-.auth-page .user-signup textarea {
+.user-edit textarea {
     height: 250px;
     resize: vertical;
     overflow-y: auto;
 }
 
-.auth-page .user-signup button {
+.user-edit button {
     padding: 10px;
     background-color: #366b4b;
     color: white;
@@ -56,14 +42,14 @@
     cursor: pointer;
 }
 
-.auth-page .user-signup button:hover {
+.user-edit button:hover {
     background-color: #28543f;
 }
 
-.auth-page .user-signup p {
+.user-edit p {
     color: #272727;
 }
 
-.auth-page .user-signup label {
+.user-edit label {
     color: #272727;
 }

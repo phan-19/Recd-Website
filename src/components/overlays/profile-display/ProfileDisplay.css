@@ -38,7 +38,7 @@
 .bio {
     font-size: 0.8rem;
     color: #d0d0d0;
-    max-height: 100px;
+    height: 80px;
     overflow: scroll;
 }
 

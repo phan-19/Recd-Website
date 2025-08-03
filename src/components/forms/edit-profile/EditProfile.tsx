@@ -97,8 +97,8 @@ const EditProfile: React.FC<EditProfileProps> = ({ onClose, profile }) => {
     };
 
     return (
-        <form className='user-signup' onSubmit={handleSubmit}>
-            <h2 className='signup-title'>Edit Profile</h2>
+        <form className='user-edit' onSubmit={handleSubmit}>
+            <h2 className='edit-title'>Edit Profile</h2>
             <input
                 type='text'
                 value={new_username}

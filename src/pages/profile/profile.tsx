@@ -102,7 +102,7 @@ const UserProfile: React.FC = () => {
               <Button
                 buttonStyle='small-button'
                 buttonText='Edit Profile'
-                onClick={() => setEditProfile(true)}
+                onClick={() => {setEditProfile(true), setMenuOpen(false)}}
               />
               <Button
                 buttonStyle='small-button'
@@ -126,12 +126,14 @@ const UserProfile: React.FC = () => {
 
         {/* Edit Profile Popup */}
         {editProfile && (
-          <EditProfile onClose={() => setEditProfile(false)} profile={{
-            user_id: user.user_id,
-            username: profile.username,
-            bio: profile.bio,
-            profile_pic: profile.profile_pic
-          }} />
+          <div className='overlay'>
+            <EditProfile onClose={() => setEditProfile(false)} profile={{
+              user_id: user.user_id,
+              username: profile.username,
+              bio: profile.bio,
+              profile_pic: profile.profile_pic
+            }} />
+          </div>
         )}
       </div>
   );

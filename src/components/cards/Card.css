@@ -26,9 +26,11 @@
 }
 
 .card-image {
-    width: 200px;
-    height: 300px;
-    object-fit: cover;
+  height: 300px;
+  width: 100%;
+  object-fit: contain;
+  background-color: #161616;
+  display: block;
 }
 
 .card-media-name {

@@ -36,6 +36,9 @@ const MediaCard: React.FC<CardProps> = ({ cardStyle, id }) => {
     }, [id]);
 
     const displayImage = (image: number[]) => {
+        if (image.length === 0) {
+            return 'src/components/assets/images/no_cover_available.png';
+        }
         const uint8Array = new Uint8Array(image);
         const blob = new Blob([uint8Array], { type: 'image/jpeg' }); // or 'image/png'
         const imageUrl = URL.createObjectURL(blob);
@@ -50,13 +53,13 @@ const MediaCard: React.FC<CardProps> = ({ cardStyle, id }) => {
 
     return (
         <div className={cardStyle}>
-            {image.length > 0 && (
+            <div className='card-image'>
                 <img
                     src={displayImage(image)}
                     alt={media_name}
                     className={'card-image'}
                 />
-            )}
+            </div>
             <div className='card-content'>
                 <button className='card-media-name' onClick={handleMediaClick}>{media_name}</button>
                 <p className='card-type'><em>{medium}</em></p>
