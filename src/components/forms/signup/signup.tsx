@@ -21,12 +21,24 @@ const UserSignup: React.FC = () => {
         }
     }
 
+    const getDefaultProfilePic = async (): Promise<number[]> => {
+        const response = await fetch('/src/components/assets/images/default.jpg');
+        const blob = await response.blob();
+        const arrayBuffer = await blob.arrayBuffer();
+        return Array.from(new Uint8Array(arrayBuffer));
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         const url = 'http://localhost:3000/user';
 
         try {
+            let pic = profilePic;
+            if (!pic) {
+                pic = await getDefaultProfilePic();
+            }
+
             const options = {
                 method: 'POST',
                 headers: {
@@ -36,7 +48,7 @@ const UserSignup: React.FC = () => {
                     username,
                     password,
                     bio,
-                    profile_pic: profilePic ?? [],
+                    profile_pic: pic,
                 }),
             };
 

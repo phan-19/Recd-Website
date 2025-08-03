@@ -4,6 +4,7 @@ import './profile.css';
 import Button from '../../components/assets/button/Button';
 import CardScroll from '../../components/cards/card-scroll/CardScroll';
 import UserInfo from '../../components/assets/user-info/UserInfo';
+import EditProfile from '../../components/forms/edit-profile/EditProfile';
 
 type User = {
   user_id: number;
@@ -78,7 +79,7 @@ const UserProfile: React.FC = () => {
               />
             ) : (
               <img
-                src={''} //Put default image here
+                src={''}
                 alt={'No Profile Photo'}
                 className='profile-pic'
               />
@@ -122,6 +123,16 @@ const UserProfile: React.FC = () => {
           <h2 className='section-title'>Your Reviews</h2>
           <CardScroll ids={profile.reviews} card_type='review' />
         </div>
+
+        {/* Edit Profile Popup */}
+        {editProfile && (
+          <EditProfile onClose={() => setEditProfile(false)} profile={{
+            user_id: user.user_id,
+            username: profile.username,
+            bio: profile.bio,
+            profile_pic: profile.profile_pic
+          }} />
+        )}
       </div>
   );
 };
