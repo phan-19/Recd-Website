@@ -20,6 +20,7 @@
 .overlay .media-image {
     max-height: 300px;
     width: auto;
+    max-width: 200px;
 }
 
 .overlay .media-content .body {
