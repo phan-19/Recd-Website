@@ -64,7 +64,7 @@ const EditProfile: React.FC<EditProfileProps> = ({ onClose, profile }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ new_pic })
+                body: JSON.stringify({ image: new_pic })
             };
 
             const response = await fetch(url, options);
