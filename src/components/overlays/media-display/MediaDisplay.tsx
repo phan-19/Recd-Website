@@ -5,6 +5,7 @@ import './MediaDisplay.css'
 import Button from '../../assets/button/Button';
 import ReviewForm from '../../forms/review-form/ReviewForm';
 import FollowButton from '../../assets/follow-button/FollowButton';
+import ToDoButton from '../../assets/todo-button/ToDoButton';
 
 type MediaDisplayProps = {
     onClose: () => void;
@@ -96,6 +97,7 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ onClose, media_id }) => {
                 <div className='popup-buttons'>
                     <Button buttonStyle='small-button' buttonText='Visit' onClick={openPage} />
                     {user_id && <FollowButton style='small-button' type='media' followed_id={media_id} />}
+                    {user_id && <ToDoButton style='small-button' media_id={media_id} />}
                     <Button buttonStyle='small-button' buttonText='Review' onClick={toggleWriteReview} />
                     <Button buttonStyle='small-button' buttonText='Exit' onClick={onClose} />
                 </div>

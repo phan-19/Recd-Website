@@ -5,7 +5,9 @@ import './media.css';
 import ReviewForm from '../../../components/forms/review-form/ReviewForm';
 import CardScroll from '../../../components/cards/card-scroll/CardScroll';
 import FollowButton from '../../../components/assets/follow-button/FollowButton';
+import ToDoDisplay from '../../../components/overlays/todo-display/TodoDisplay';
 import Button from '../../../components/assets/button/Button';
+import ToDoButton from '../../../components/assets/todo-button/ToDoButton';
 
 type Media = {
     media_id: number;
@@ -79,6 +81,7 @@ const Media: React.FC = ({ }) => {
                 <div className='buttons'>
                     <Button buttonStyle='small-button' buttonText='Review' onClick={toggleWriteReview} />
                     <FollowButton style='small-button' type='media' followed_id={media.media_id} />
+                    <ToDoButton style='small-button' media_id={media.media_id} />
                 </div>
                 <div>
                     <CardScroll ids={media.reviews} card_type='review' />

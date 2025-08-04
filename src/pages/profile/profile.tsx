@@ -24,6 +24,7 @@ const UserProfile: React.FC = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [followingUsers, setFollowingUsers] = useState<number[]>([]);
   const [followingMedia, setFollowingMedia] = useState<number[]>([]);
+  const [todo, setTodo] = useState<number[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
 
@@ -47,6 +48,11 @@ const UserProfile: React.FC = () => {
         .then(res => res.json())
         .then(data => setFollowingMedia(data.following))
         .catch(err => console.error('Failed to fetch following:', err));
+
+      fetch(`http://localhost:3000/todo/${storedUser.user_id}`)
+        .then(res => res.json())
+        .then(data => setTodo(data.todo_list))
+        .catch(err => console.error('Failed to fetch todo:', err));
     }
   }, []);
 
@@ -67,32 +73,32 @@ const UserProfile: React.FC = () => {
   if (!profile) return <p>Loading profile...</p>;
 
   return (
-      <div className='profile user'>
-        <div className='profile-content'>
-          <div className='profile-header'>
-            {/* Profile Picture */}
-            {profile.profile_pic.length > 0 ? (
-              <img
-                src={getProfilePicSrc(profile.profile_pic)}
-                alt={`${profile.username}'s profile`}
-                className='profile-pic'
-              />
-            ) : (
-              <img
-                src={''}
-                alt={'No Profile Photo'}
-                className='profile-pic'
-              />
-            )}
+    <div className='profile user'>
+      <div className='profile-content'>
+        <div className='profile-header'>
+          {/* Profile Picture */}
+          {profile.profile_pic.length > 0 ? (
+            <img
+              src={getProfilePicSrc(profile.profile_pic)}
+              alt={`${profile.username}'s profile`}
+              className='profile-pic'
+            />
+          ) : (
+            <img
+              src={''}
+              alt={'No Profile Photo'}
+              className='profile-pic'
+            />
+          )}
 
-            {/* Username */}
-            <h2 className='username'>@{profile.username}</h2>
+          {/* Username */}
+          <h2 className='username'>@{profile.username}</h2>
 
-            {/* Following Counts and Stuff */}
-            <div className='user-info'>
-              <UserInfo profile={profile} followingUsers={followingUsers} followingMedia={followingMedia} />
-            </div>
-            
+          {/* Following Counts and Stuff */}
+          <div className='user-info'>
+            <UserInfo profile={profile} followingUsers={followingUsers} followingMedia={followingMedia} />
+          </div>
+
           {/* Hamburger Menu */}
           <button className='profile-hamburger' onClick={() => setMenuOpen(!menuOpen)}>
             ⋮
@@ -102,7 +108,7 @@ const UserProfile: React.FC = () => {
               <Button
                 buttonStyle='small-button'
                 buttonText='Edit Profile'
-                onClick={() => {setEditProfile(true), setMenuOpen(false)}}
+                onClick={() => { setEditProfile(true), setMenuOpen(false) }}
               />
               <Button
                 buttonStyle='small-button'
@@ -115,27 +121,31 @@ const UserProfile: React.FC = () => {
 
         {/* Bio */}
         <p className='bio'>{profile.bio}</p>
-        </div>
-
-
-        {/* Card Scrolls */}
-        <div>
-          <h2 className='section-title'>Your Reviews</h2>
-          <CardScroll ids={profile.reviews} card_type='review' />
-        </div>
-
-        {/* Edit Profile Popup */}
-        {editProfile && (
-          <div className='overlay'>
-            <EditProfile onClose={() => setEditProfile(false)} profile={{
-              user_id: user.user_id,
-              username: profile.username,
-              bio: profile.bio,
-              profile_pic: profile.profile_pic
-            }} />
-          </div>
-        )}
       </div>
+
+
+      {/* Card Scrolls */}
+      <div>
+        <h2 className='section-title'>Your Reviews</h2>
+        <CardScroll ids={profile.reviews} card_type='review' />
+      </div>
+      <div>
+        <h2 className='section-title'>Your Todo List</h2>
+        <CardScroll ids={todo} card_type='media' />
+      </div>
+
+      {/* Edit Profile Popup */}
+      {editProfile && (
+        <div className='overlay'>
+          <EditProfile onClose={() => setEditProfile(false)} profile={{
+            user_id: user.user_id,
+            username: profile.username,
+            bio: profile.bio,
+            profile_pic: profile.profile_pic
+          }} />
+        </div>
+      )}
+    </div>
   );
 };
 
