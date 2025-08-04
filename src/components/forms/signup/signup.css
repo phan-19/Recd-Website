@@ -42,7 +42,7 @@
 }
 
 .auth-page .user-signup textarea {
-    height: 250px;
+    height: 100px;
     resize: vertical;
     overflow-y: auto;
 }

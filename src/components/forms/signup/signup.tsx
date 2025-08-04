@@ -60,14 +60,14 @@ const UserSignup: React.FC = () => {
 
             const result = await response.json();
 
-            if (result.result) {
+            if (result.true) {
                 setMessage('Signup was successful. Please log in.');
             } else {
                 setMessage('Signup failed: ' + result.err);
             }
         } catch (error) {
             console.error('Signup error:', error);
-            setMessage('Could not connect to server. Please try again.');
+            setMessage('Signup was not successful. Please check all fields.');
         }
     };
 

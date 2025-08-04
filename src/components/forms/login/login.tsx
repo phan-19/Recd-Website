@@ -26,11 +26,11 @@ const UserLogin: React.FC<LoginProps> = ({ onLogin }) => {
 
             const result = await response.json();
 
-            if (result) {
+            if (result.result) {
                 const user = {
                     user_id: result.user_id
                 };
-                setMessage(`Login successful`);
+                setMessage(`Login successful for user ${user.user_id}`);
                 localStorage.setItem('user', JSON.stringify(user))
                 console.log('User logged in:', {username, password});
                 onLogin(user);
