@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './signup.css';
 
 const UserSignup: React.FC = () => {
-    const [ username, setUsername ] = useState('');
-    const [ password, setPassword ] = useState('');
-    const [ bio, setBio ] = useState('');
-    const [ profilePic, setProfilePic ] = useState<Array<number> | null>(null);
-    const [ message, setMessage ] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [bio, setBio] = useState('');
+    const [profilePic, setProfilePic] = useState<Array<number> | null>(null);
+    const [message, setMessage] = useState('');
 
     const convertImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -60,7 +60,7 @@ const UserSignup: React.FC = () => {
 
             const result = await response.json();
 
-            if (result.true) {
+            if (result.result) {
                 setMessage('Signup was successful. Please log in.');
             } else {
                 setMessage('Signup failed: ' + result.err);
